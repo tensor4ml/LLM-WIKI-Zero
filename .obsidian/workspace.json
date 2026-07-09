@@ -1,0 +1,217 @@
+{
+  "main": {
+    "id": "15bcf1dc2b124e50",
+    "type": "split",
+    "children": [
+      {
+        "id": "dad494147d28231e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "73f184e041f7e86c",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "새 탭"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ed0e95f7e581866e",
+    "type": "split",
+    "children": [
+      {
+        "id": "626d03bdb00d3d40",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f4fd252419abe870",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "파일 탐색기"
+            }
+          },
+          {
+            "id": "654f437650bdcc81",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "검색"
+            }
+          },
+          {
+            "id": "c63ed829f6096aad",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "북마크"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "c0351df504474be8",
+    "type": "split",
+    "children": [
+      {
+        "id": "c4d11aea0a64933d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f18992a3682b493a",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "백링크"
+            }
+          },
+          {
+            "id": "0b6ce1d6e4e55a4f",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "나가는 링크"
+            }
+          },
+          {
+            "id": "1c2ac725d5ae7a64",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "태그"
+            }
+          },
+          {
+            "id": "f527b401937e0644",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "모든 속성"
+            }
+          },
+          {
+            "id": "0dacf761fe41aa76",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "개요"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:빠른 전환기 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "daily-notes:오늘의 일일 노트 열기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false,
+      "bases:새 베이스 생성하기": false
+    }
+  },
+  "active": "73f184e041f7e86c",
+  "lastOpenFiles": [
+    "20_Wiki/20.05_Questions/danyang-2night-3days-travel-itinerary.md",
+    "graphify-out/cache/ast/v0.9.9/43d0d016c5086ba0c745cbd2b12604d243e16f0baa37446b203b54d8592d94f6.json",
+    "graphify-out/cache/ast/v0.9.9/52c55bdb911a572bdb27d79b5c129d6798d27d465e36f84fa7f055fe473cd780.json",
+    "graphify-out/cache/ast/v0.9.9/0df7ca006a5ec61489ec1352cb66ff2495caf82fa281b09d3136448857528a1d.json",
+    "graphify-out/cache/ast/v0.9.9/2008bc2988ae12b7ca1f6dd8e1c02e759defd5c0800d0a0faf0c1aaf9f7cb1a7.json",
+    "graphify-out/cache/ast/v0.9.9/95b2b219ba39a7445efc8d490758ed7b7cef635b14e01c35f7bc322577327378.json",
+    "20_Wiki/20.05_Questions/danyang-rainy-day-2night-3days-travel-itinerary.md",
+    "10_Raw/10.01_Clippings/2026-07-09-충북 단양 여행 가볼만한 곳 추천 카페도.md",
+    "graphify-out/2026-07-09/manifest.json",
+    "graphify-out/2026-07-09/graph.json",
+    "graphify-out/2026-07-09/GRAPH_REPORT.md",
+    "graphify-out/2026-07-09",
+    "graphify-out/cache/ast/v0.9.9/a929af82dd122e962acedc4ec36e0fd7f3bf469cd434cce7acfd1327022ae8a5.json",
+    "graphify-out/cache/ast/v0.9.9/60f8131502e8af8745a48a9a17d81b0040d846214cc9c005fb029f7a3d6a23f6.json",
+    "graphify-out/GRAPH_REPORT.md",
+    "20_Wiki/20.06_Syntheses/danyang-travel-sources-analysis.md",
+    "20_Wiki/20.04_Topics/namhangang-riverside-tourism.md",
+    "20_Wiki/20.04_Topics/danyang-travel-course.md",
+    "20_Wiki/20.03_Entities/siruseom-miracle-bridge.md",
+    "20_Wiki/20.03_Entities/cafe-sann.md",
+    "20_Wiki/20.03_Entities/danyang-gugyeong-market.md",
+    "20_Wiki/20.03_Entities/guinsa-temple.md",
+    "20_Wiki/20.03_Entities/mancheonha-skywalk.md",
+    "20_Wiki/20.03_Entities/dodamsambong-peaks.md",
+    "20_Wiki/20.03_Entities/danyanggang-jando-trail.md",
+    "20_Wiki/20.03_Entities/danyang-county.md",
+    "20_Wiki/20.02_Concepts/legend-of-dajagu-grandma.md",
+    "20_Wiki/20.02_Concepts/digital-tourism-resident-card.md",
+    "20_Wiki/20.02_Concepts/miracle-of-siruseom.md",
+    "20_Wiki/20.02_Concepts/danyang-eight-scenic-views.md",
+    "20_Wiki/20.01_Sources/2026-07-09-danyang-good-travel-spots-best-7.md",
+    "20_Wiki/20.01_Sources/2026-07-09-danyang-travel-spots-and-cafes.md",
+    "20_Wiki/20.01_Sources/2026-07-09-danyang-one-day-travel-course-best-9.md",
+    "20_Wiki/20.01_Sources/2026-07-09-danyang-entertainment-activities-visit-korea.md",
+    "20_Wiki/20.01_Sources/2026-07-09-danyang-travel-course-best-7.md"
+  ]
+}

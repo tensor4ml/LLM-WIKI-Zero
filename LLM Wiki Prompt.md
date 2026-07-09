@@ -1,4 +1,4 @@
-# LLM Wiki Rules Modularization Prompt
+# LLM Wiki 규칙 모듈화 프롬프트
 
 당신은 Markdown 기반 **LLM Wiki**를 구축하고 유지보수하는 에이전트입니다.
 
@@ -148,41 +148,41 @@ llm-wiki/
 
 
 ````markdown
-# LLM Wiki Agent
+# LLM Wiki 에이전트
 
-## Role
+## 역할 (Role)
 
-You are the maintainer of an LLM-managed Markdown Wiki.
+당신은 LLM이 관리하는 Markdown Wiki의 유지보수 담당자입니다.
 
-The user curates sources, asks questions, reviews outputs, and guides priorities.
-You maintain the Wiki structure, update Markdown pages, preserve links, track changes, and keep the knowledge base coherent over time.
+사용자는 소스를 큐레이션하고, 질문을 하고, 출력 결과를 검토하며, 우선순위를 안내합니다.
+당신은 Wiki 구조를 유지하고, Markdown 페이지를 업데이트하고, 링크를 보존하고, 변경사항을 추적하며, 지식 베이스를 시간이 지남에 따라 일관성 있게 유지합니다.
 
-This Wiki is a persistent, compounding knowledge layer built from raw sources and user questions.
-
----
-
-## Non-Negotiable Rules
-
-1. Never modify files under `10_Raw/` unless the user explicitly instructs you to do so.
-2. Treat raw sources as immutable source-of-truth documents.
-3. Maintain generated knowledge under `20_Wiki/`.
-4. Use Obsidian-style links: `[[Page Name]]`.
-5. Every meaningful Wiki page must include YAML frontmatter.
-6. Update `20_Wiki/index.md` after meaningful Wiki changes.
-7. Append to `20_Wiki/log.md` after meaningful operations.
-8. Do not invent unsupported claims.
-9. Surface contradictions and uncertainty explicitly.
-10. Before destructive operations, propose a plan and wait for explicit user approval.
+이 Wiki는 원본 소스와 사용자 질문으로부터 구축된 지속적이고 복합적인 지식 레이어입니다.
 
 ---
 
-## Rule Files
+## 절대 지켜야 하는 규칙 (Non-Negotiable Rules)
 
-Detailed rules are stored under `30_Rules/`.
+1. 사용자가 명시적으로 지시하지 않는 한 `10_Raw/` 하위의 파일을 절대 수정하지 않습니다.
+2. 원본 소스는 불변의 진실의 원천 문서로 취급합니다.
+3. 생성된 지식은 `20_Wiki/` 하위에서 유지합니다.
+4. Obsidian 스타일 링크를 사용합니다: `[[페이지 이름]]`.
+5. 모든 의미 있는 Wiki 페이지에는 YAML frontmatter가 포함되어야 합니다.
+6. 의미 있는 Wiki 변경 후에는 `20_Wiki/index.md`를 업데이트합니다.
+7. 의미 있는 작업 후에는 `20_Wiki/log.md`에 내용을 추가합니다.
+8. 근거 없는 주장을 만들어내지 않습니다.
+9. 모순과 불확실성을 명시적으로 드러냅니다.
+10. 파괴적인 작업 전에는 계획을 제안하고 사용자의 명시적인 승인을 기다립니다.
 
-When working on the Wiki, read the relevant rule files before making changes.
+---
 
-Load rule files in this order when applicable:
+## 규칙 파일 (Rule Files)
+
+세부 규칙은 `30_Rules/` 하위에 저장되어 있습니다.
+
+Wiki 작업 시, 변경사항을 적용하기 전에 관련 규칙 파일을 읽으세요.
+
+해당되는 경우 다음 순서로 규칙 파일을 로드하세요.
 
 1. `30_Rules/Core-Principles.md`
 2. `30_Rules/Directory-Structure.md`
@@ -195,101 +195,142 @@ Load rule files in this order when applicable:
 9. `30_Rules/Refactor-Policy.md`
 10. `30_Rules/Operation-Reporting.md`
 
-If a rule file conflicts with this agent instruction file, this agent instruction file takes priority.
+규칙 파일이 이 에이전트 지시 파일과 충돌하는 경우, 이 에이전트 지시 파일이 우선합니다.
 
 ---
 
-## Skill Routing
+## 스킬 라우팅 (Skill Routing)
 
-Use the appropriate skill depending on the user request.
+사용자 요청에 따라 적절한 스킬을 사용하세요.
 
-### Ingest
+### Ingest (수집)
 
-Use `{SkillDirectory}/ingest/SKILL.md` when the user asks to:
+사용자가 다음을 요청할 때 `{SkillDirectory}/ingest/SKILL.md`를 사용하세요.
 
-- ingest a source
-- process a new document
-- import files
-- add an article, paper, transcript, note, or report to the Wiki
-- process files in `10_Raw/10.02_Inbox/`
+- 소스 수집
+- 새 문서 처리
+- 파일 가져오기
+- 기사, 논문, 스크립트, 메모, 보고서를 Wiki에 추가
+- `10_Raw/10.02_Inbox/`의 파일 처리
 
-### Query
+### Query (조회)
 
-Use `{SkillDirectory}/query/SKILL.md` when the user asks to:
+사용자가 다음을 요청할 때 `{SkillDirectory}/query/SKILL.md`를 사용하세요.
 
-- answer from the Wiki
-- summarize what the Wiki says
-- compare existing concepts
-- synthesize existing Wiki knowledge
-- save a reusable answer back into the Wiki
+- Wiki에서 답변 찾기
+- Wiki 내용 요약
+- 기존 개념 비교
+- 기존 Wiki 지식 합성
+- 재사용 가능한 답변을 Wiki에 저장
 
-### Lint
+### Lint (검사)
 
-Use `{SkillDirectory}/lint/SKILL.md` when the user asks to:
+사용자가 다음을 요청할 때 `{SkillDirectory}/lint/SKILL.md`를 사용하세요.
 
-- lint the Wiki
-- check Wiki health
-- find broken links
-- find orphan pages
-- detect duplicate pages
-- detect contradictions
-- check stale or weakly sourced claims
-
----
-
-## Priority Order
-
-When instructions conflict, follow this priority order:
-
-1. User’s explicit instruction
-2. Safety and data preservation
-3. This agent instruction file
-4. Relevant rule files
-5. Relevant skill file
-6. Existing Wiki conventions
-7. General best practices
+- Wiki 검사
+- Wiki 상태 확인
+- 깨진 링크 찾기
+- 고아 페이지 찾기
+- 중복 페이지 감지
+- 모순 감지
+- 오래되거나 근거가 약한 주장 확인
 
 ---
 
-## Completion Report
+## 우선순위 (Priority Order)
 
-After every meaningful Wiki operation, report:
+지시사항이 충돌할 경우 다음 우선순위를 따르세요.
+
+1. 사용자의 명시적인 지시
+2. 안전 및 데이터 보존
+3. 이 에이전트 지시 파일
+4. 관련 규칙 파일
+5. 관련 스킬 파일
+6. 기존 Wiki 관례
+7. 일반적인 모범 사례
+
+---
+
+## 완료 보고 (Completion Report)
+
+모든 의미 있는 Wiki 작업 후 다음 형식으로 보고하세요.
 
 ```markdown
-# LLM Wiki Operation Report
+# LLM Wiki 작업 보고서
 
-## Status
-Complete / Partial / Failed
+## 상태 (Status)
+완료 / 부분 완료 / 실패
 
-## Skill Used
-Ingest / Query / Lint / None / Multiple
+## 사용한 스킬 (Skill Used)
+Ingest / Query / Lint / 없음 / 복수
 
-## Rule Files Used
+## 사용한 규칙 파일 (Rule Files Used)
 - ...
 
-## Created Files
+## 생성한 파일 (Created Files)
 - ...
 
-## Updated Files
+## 수정한 파일 (Updated Files)
 - ...
 
-## Raw Sources Modified
-No
+## 원본 소스 수정 여부 (Raw Sources Modified)
+없음
 
-## Key Decisions
+## 주요 결정 사항 (Key Decisions)
 - ...
 
-## Issues / Uncertainties
+## 문제 / 불확실성 (Issues / Uncertainties)
 - ...
 
-## Recommend## 5. 30_Rules/Directory-Structure.md 작성
+## 권장 다음 단계 (Recommended Next Steps)
+1. ...
+2. ...
+3. ...
+```
+````
+
+---
+
+## 4. 30_Rules/Core-Principles.md 작성
 
 ````markdown
-# Directory Structure Rules
+# 핵심 원칙 (Core Principles)
 
-## Required Structure
+이 문서는 LLM Wiki의 핵심 철학적·운영적 원칙을 정의합니다.
 
-Use this structure:
+## 1. 지속적 복합 지식 레이어 (Persistent Compounding Knowledge Layer)
+LLM Wiki는 단순한 대화 기록이나 임시 작업 공간이 아닙니다. 시간이 지남에 따라 원본 소스와 사용자 상호작용으로부터 지식을 수집, 정리, 합성하도록 설계된 지속적이고 복합적인 지식 레이어입니다.
+- **지속적(Persistent)**: 세션이 종료되어도 정보가 유지되고 정제됩니다.
+- **복합적(Compounding)**: 새로운 소스와 Q&A는 처음부터 다시 설명하는 것이 아니라 기존 개념 위에 구축됩니다.
+- **연결된(Linked)**: 모든 페이지는 Obsidian 스타일 링크로 상호 연결되어 탐색 가능한 지식 그래프를 형성합니다.
+
+## 2. 사용자와 에이전트의 역할 (User and Agent Roles)
+- **사용자**: 소스를 큐레이션하고, 질문을 하고, 출력 결과를 검토하며, 우선순위를 안내합니다.
+- **에이전트(LLM)**: Wiki 구조를 유지하고, Markdown 페이지를 업데이트하고, 링크를 보존하고, 변경사항을 추적하며, 지식 베이스를 일관성 있고 깔끔하며 최신 상태로 유지합니다.
+
+## 3. 절대 지켜야 하는 규칙 (Non-Negotiable Rules)
+1. 사용자가 명시적으로 지시하지 않는 한 `10_Raw/` 하위의 파일을 절대 수정하지 않습니다.
+2. 원본 소스는 불변의 진실의 원천 문서로 취급합니다.
+3. 생성된 지식은 `20_Wiki/` 하위에서 유지합니다.
+4. Obsidian 스타일 링크를 사용합니다: `[[페이지 이름]]`.
+5. 모든 의미 있는 Wiki 페이지에는 YAML frontmatter가 포함되어야 합니다.
+6. 의미 있는 Wiki 변경 후에는 `20_Wiki/index.md`를 업데이트합니다.
+7. 의미 있는 작업 후에는 `20_Wiki/log.md`에 내용을 추가합니다.
+8. 근거 없는 주장을 만들어내지 않습니다.
+9. 모순과 불확실성을 명시적으로 드러냅니다.
+10. 파괴적인 작업 전에는 계획을 제안하고 사용자의 명시적인 승인을 기다립니다.
+````
+
+---
+
+## 5. 30_Rules/Directory-Structure.md 작성
+
+````markdown
+# 디렉터리 구조 규칙 (Directory Structure Rules)
+
+## 필수 구조 (Required Structure)
+
+다음 구조를 사용하세요.
 
 ```text
 llm-wiki/
@@ -347,345 +388,250 @@ llm-wiki/
 └─ 30_Rules/
 ```
 
-## Raw Layer
+## 원본 레이어 (Raw Layer)
 
-Path:
-
-```text
-10_Raw/
-```
-
-The raw layer stores original source materials.
-
-Rules:
-
-- Do not modify files under `10_Raw/`.
-- Do not normalize, rename, delete, or move raw files unless the user explicitly asks.
-- If a raw source is messy, preserve it and create clean Wiki pages from it.
-- If source metadata is unclear, mark it as unknown.
-
-## Wiki Layer
-
-Path:
-
-```text
-20_Wiki/
-```
-
-The Wiki layer stores LLM-generated Markdown pages.
-
-Rules:
-- Create and update generated knowledge under `20_Wiki/`.
-- Keep pages readable in Obsidian.
-- Use YAML frontmatter.
-- Use lowercase kebab-case filenames.
-- Use Obsidian-style links.
-
-## Rules Layer
-
-Path:
-
-```text
-30_Rules/
-```
-
-The rules layer stores modular maintenance rules.
-
-Rules:
-
-- Keep CLAUDE.md, AGENTS.md, and GEMINI.md concise.
-- Put detailed standards in rule files.
-- Update rule files when the Wiki process evolves.
-
-## Skills Layer
-
-Path:
-
-```text
-.claude/skills/
-.codex/skills/
-.agent/skills/
-```
-
-The skills layer stores project-specific task workflows under the project-local agent directory for each AI environment.
-
-Rules:
-
-- Use skills for operational procedures.
-- Use rules for global standards.
-- If a skill conflicts with a rule, follow the rule unless the user explicitly overrides it.
-
-````
-
----�     ├─ Codex-configuration.md
-│     ├─ Antigravity-configuration.md
-│     ├─ Ingest Skill.md
-│     ├─ Query Skill.md
-│     └─ Lint Skill.md
-├─ 10_Raw/
-│  ├─ 10.01_Clippings/
-│  ├─ 10.02_Inbox/
-│  └─ 10.03_Assets/
-├─ 20_Wiki/
-│  ├─ index.md
-│  ├─ log.md
-│  ├─ overview.md
-│  ├─ 20.01_Sources/
-│  ├─ 20.02_Concepts/
-│  ├─ 20.03_Entities/
-│  ├─ 20.04_Topics/
-│  ├─ 20.05_Questions/
-│  ├─ 20.06_Syntheses/
-│  └─ 20.07_Templates/
-└─ 30_Rules/
-````
-
-## Raw Layer
-
-Path:
+경로:
 
 ```text
 10_Raw/
 ```
 
-The raw layer stores original source materials.
+원본 레이어는 원본 소스 자료를 저장합니다.
 
-Rules:
+규칙:
 
-- Do not modify files under `10_Raw/`.
-- Do not normalize, rename, delete, or move raw files unless the user explicitly asks.
-- If a raw source is messy, preserve it and create clean Wiki pages from it.
-- If source metadata is unclear, mark it as unknown.
+- `10_Raw/` 하위의 파일을 수정하지 않습니다.
+- 사용자가 명시적으로 요청하지 않는 한 원본 파일을 정규화, 이름 변경, 삭제 또는 이동하지 않습니다.
+- 원본 소스가 지저분한 경우, 그대로 보존하고 깔끔한 Wiki 페이지를 새로 생성합니다.
+- 소스 메타데이터가 불분명한 경우, unknown으로 표시합니다.
 
-## Wiki Layer
+## Wiki 레이어 (Wiki Layer)
 
-Path:
+경로:
 
 ```text
 20_Wiki/
 ```
 
-The Wiki layer stores LLM-generated Markdown pages.
+Wiki 레이어는 LLM이 생성한 Markdown 페이지를 저장합니다.
 
-Rules:
-- Create and update generated knowledge under `20_Wiki/`.
-- Keep pages readable in Obsidian.
-- Use YAML frontmatter.
-- Use lowercase kebab-case filenames.
-- Use Obsidian-style links.
+규칙:
+- `20_Wiki/` 하위에 생성된 지식을 만들고 업데이트합니다.
+- Obsidian에서 읽기 쉽게 페이지를 유지합니다.
+- YAML frontmatter를 사용합니다.
+- 소문자 케밥 케이스 파일명을 사용합니다.
+- Obsidian 스타일 링크를 사용합니다.
 
-## Rules Layer
+## 규칙 레이어 (Rules Layer)
 
-Path:
+경로:
 
 ```text
 30_Rules/
 ```
 
-The rules layer stores modular maintenance rules.
+규칙 레이어는 모듈식 유지보수 규칙을 저장합니다.
 
-Rules:
+규칙:
 
-- Keep `{AgentInstructionFile}` concise.
-- Put detailed standards in rule files.
-- Update rule files when the Wiki process evolves.
+- `{AgentInstructionFile}`을 간결하게 유지합니다.
+- 세부 표준은 규칙 파일에 넣습니다.
+- Wiki 프로세스가 발전할 때 규칙 파일을 업데이트합니다.
 
-## Skills Layer
+## 스킬 레이어 (Skills Layer)
 
-Path:
+경로:
 
 ```text
 {SkillDirectory}/
 ```
 
-The skills layer stores project-specific task workflows under the project-local agent directory.
+스킬 레이어는 프로젝트-local 에이전트 디렉터리 하위에 프로젝트 특화 작업 워크플로우를 저장합니다.
 
-Rules:
+규칙:
 
-- Use skills for operational procedures.
-- Use rules for global standards.
-- If a skill conflicts with a rule, follow the rule unless the user explicitly overrides it.
-
+- 운영 절차에는 스킬을 사용합니다.
+- 전역 표준에는 규칙을 사용합니다.
+- 스킬이 규칙과 충돌하는 경우, 사용자가 명시적으로 재정의하지 않는 한 규칙을 따릅니다.
 ````
 
 ---
 
 ## 6. 30_Rules/Page-Types.md 작성
 
-```markdown
-# Page Type Rules
+````markdown
+# 페이지 유형 규칙 (Page Type Rules)
 
-## Source Pages
+## 소스 페이지 (Source Pages)
 
-Path:
+경로:
 
 ```text
 20_Wiki/20.01_Sources/
-````
+```
 
-Purpose:
+목적:
 
-A source page summarizes and indexes one raw source.
+소스 페이지는 하나의 원본 소스를 요약하고 인덱싱합니다.
 
-Use for:
+다음에 사용하세요:
 
-- articles
-- papers
-- reports
-- books
-- transcripts
-- clipped web pages
-- uploaded documents
+- 기사
+- 논문
+- 보고서
+- 도서
+- 스크립트/대본
+- 클리핑된 웹 페이지
+- 업로드된 문서
 
-Source pages should include:
+소스 페이지에 포함해야 할 내용:
 
-- summary
-- key claims
-- important details
-- evidence
-- related concepts
-- related entities
-- related topics
-- contradictions or tensions
-- open questions
+- 요약
+- 핵심 주장
+- 중요한 세부 정보
+- 증거
+- 관련 개념
+- 관련 엔티티
+- 관련 토픽
+- 모순 또는 긴장 관계
+- 미해결 질문
 
-## Concept Pages
+## 개념 페이지 (Concept Pages)
 
-Path:
+경로:
 
 ```text
 20_Wiki/20.02_Concepts/
 ```
 
-Purpose:
+목적:
 
-A concept page explains one reusable idea.
+개념 페이지는 재사용 가능한 하나의 아이디어를 설명합니다.
 
-Examples:
+예시:
 
 - RAG
-- Persistent Knowledge Base
-- Knowledge Compounding
-- Wiki Linting
+- 지속적 지식 베이스 (Persistent Knowledge Base)
+- 지식 복합화 (Knowledge Compounding)
+- Wiki 린팅 (Wiki Linting)
 
-Concept pages should include:
+개념 페이지에 포함해야 할 내용:
 
-- definition
-- why it matters
-- key points
-- related concepts
-- related sources
-- open questions
+- 정의
+- 중요성
+- 핵심 포인트
+- 관련 개념
+- 관련 소스
+- 미해결 질문
 
-## Entity Pages
+## 엔티티 페이지 (Entity Pages)
 
-Path:
+경로:
 
 ```text
 20_Wiki/20.03_Entities/
 ```
 
-Purpose:
+목적:
 
-An entity page describes a named object.
+엔티티 페이지는 명명된 객체를 설명합니다.
 
-Examples:
+예시:
 
-- person
-- organization
-- company
-- product
-- software tool
-- place
-- project
+- 인물
+- 조직
+- 회사
+- 제품
+- 소프트웨어 도구
+- 장소
+- 프로젝트
 
-Entity pages should include:
+엔티티 페이지에 포함해야 할 내용:
 
-- description
-- role or relevance
-- key details
-- related concepts
-- related sources
-- open questions
+- 설명
+- 역할 또는 관련성
+- 핵심 세부 정보
+- 관련 개념
+- 관련 소스
+- 미해결 질문
 
-## Topic Pages
+## 토픽 페이지 (Topic Pages)
 
-Path:
+경로:
 
 ```text
 20_Wiki/20.04_Topics/
 ```
 
-Purpose:
+목적:
 
-A topic page acts as a hub for a broader subject area.
+토픽 페이지는 더 넓은 주제 영역의 허브 역할을 합니다.
 
-Topic pages should include:
+토픽 페이지에 포함해야 할 내용:
 
-- overview
-- key concepts
-- important sources
-- related entities
-- current synthesis
-- open questions
+- 개요
+- 핵심 개념
+- 중요한 소스
+- 관련 엔티티
+- 현재 합성 내용
+- 미해결 질문
 
-## Question Pages
+## 질문 페이지 (Question Pages)
 
-Path:
+경로:
 
 ```text
 20_Wiki/20.05_Questions/
 ```
 
-Purpose:
+목적:
 
-A question page saves a reusable user question and answer.
+질문 페이지는 재사용 가능한 사용자 질문과 답변을 저장합니다.
 
-Save a question only when the answer has future value.
+미래 가치가 있는 답변이 있을 때만 질문을 저장하세요.
 
-Do not save:
+저장하지 않을 것:
 
-- trivial questions
-- one-off checks
-- typo fixes
-- short commands
+- 사소한 질문
+- 일회성 확인
+- 오타 수정
+- 짧은 명령
 
-## Synthesis Pages
+## 합성 페이지 (Synthesis Pages)
 
-Path:
+경로:
 
 ```text
 20_Wiki/20.06_Syntheses/
 ```
 
-Purpose:
+목적:
 
-A synthesis page combines multiple pages, sources, or ideas into a higher-level analysis.
+합성 페이지는 여러 페이지, 소스 또는 아이디어를 상위 수준의 분석으로 결합합니다.
 
-Use for:
+다음에 사용하세요:
 
-- comparisons
-- frameworks
-- arguments
-- decision memos
-- literature-style syntheses
-- strategic summaries
-- maintenance reports
-
+- 비교
+- 프레임워크
+- 논증
+- 의사결정 메모
+- 문헌 스타일 합성
+- 전략적 요약
+- 유지보수 보고서
 ````
 
 ---
 
 ## 7. 30_Rules/Frontmatter.md 작성
 
-```markdown
-# Frontmatter Rules
+````markdown
+# Frontmatter 규칙 (Frontmatter Rules)
 
-## Requirement
+## 요구 사항 (Requirement)
 
-Every meaningful Wiki page should include YAML frontmatter.
+모든 의미 있는 Wiki 페이지에는 YAML frontmatter가 포함되어야 합니다.
 
-## Required Fields
+## 필수 필드 (Required Fields)
 
 ```yaml
 ---
@@ -695,9 +641,9 @@ created:
 updated:
 tags:
 ---
-````
+```
 
-## Optional Fields
+## 선택적 필드 (Optional Fields)
 
 ```yaml
 aliases:
@@ -710,9 +656,9 @@ version:
 ---
 ```
 
-## Allowed Type Values
+## 허용되는 type 값 (Allowed Type Values)
 
-Use these values when applicable:
+해당되는 경우 다음 값들을 사용하세요:
 
 ```text
 source
@@ -728,36 +674,35 @@ log
 template
 ```
 
-## Date Format
+## 날짜 형식 (Date Format)
 
-Use `YYYY-MM-DD`.
+`YYYY-MM-DD` 형식을 사용하세요.
 
-## Simplicity Rule
+## 단순성 원칙 (Simplicity Rule)
 
-Do not overcomplicate frontmatter in the early stage.
+초기 단계에서 frontmatter를 지나치게 복잡하게 만들지 마세요.
 
-Add metadata only when it improves:
+다음을 향상시킬 때만 메타데이터를 추가하세요:
 
-- navigation
-- search
-- filtering
-- maintenance
-- source tracking
-
+- 탐색
+- 검색
+- 필터링
+- 유지보수
+- 소스 추적
 ````
 
 ---
 
 ## 8. 30_Rules/Naming-and-Linking.md 작성
 
-```markdown
-# Naming and Linking Rules
+````markdown
+# 명명 및 링크 규칙 (Naming and Linking Rules)
 
-## Filename Rules
+## 파일명 규칙 (Filename Rules)
 
-Use lowercase kebab-case filenames.
+소문자 케밥 케이스 파일명을 사용하세요.
 
-Good:
+좋은 예:
 
 ```text
 llm-wiki.md
@@ -766,9 +711,9 @@ persistent-knowledge-base.md
 wiki-ingestion-workflow.md
 obsidian-web-clipper.md
 llm-wiki-vs-rag.md
-````
+```
 
-Avoid:
+피해야 할 예:
 
 ```text
 LLM Wiki.md
@@ -778,27 +723,27 @@ new note.md
 My Great Summary.md
 ```
 
-## Page Title Rules
+## 페이지 제목 규칙 (Page Title Rules)
 
-Markdown page titles may use normal capitalization.
+Markdown 페이지 제목은 일반적인 대소문자 규칙을 사용할 수 있습니다.
 
-Example:
+예시:
 
 ```markdown
 # LLM Wiki
 ```
 
-Filename:
+파일명:
 
 ```text
 llm-wiki.md
 ```
 
-## Link Rules
+## 링크 규칙 (Link Rules)
 
-Use Obsidian-style links.
+Obsidian 스타일 링크를 사용하세요.
 
-Examples:
+예시:
 
 ```markdown
 [[LLM Wiki]]
@@ -807,111 +752,110 @@ Examples:
 [[Obsidian]]
 ```
 
-## Linking Expectations
+## 링크 기대치 (Linking Expectations)
 
-- Source pages should link to related concepts, entities, and topics.
-- Concept pages should link to related concepts and supporting sources.
-- Entity pages should link to related concepts, topics, and sources.
-- Topic pages should function as hubs.
-- Synthesis pages should link to all major pages they draw from.
-- Question pages should link to the pages used in the answer.
+- 소스 페이지는 관련 개념, 엔티티 및 토픽에 링크해야 합니다.
+- 개념 페이지는 관련 개념과 지원 소스에 링크해야 합니다.
+- 엔티티 페이지는 관련 개념, 토픽 및 소스에 링크해야 합니다.
+- 토픽 페이지는 허브 역할을 해야 합니다.
+- 합성 페이지는 참조하는 모든 주요 페이지에 링크해야 합니다.
+- 질문 페이지는 답변에 사용된 페이지에 링크해야 합니다.
 
-## Link Quality
+## 링크 품질 (Link Quality)
 
-Avoid excessive linking of every repeated word.
+반복되는 모든 단어에 과도하게 링크하는 것을 피하세요.
 
-Prefer meaningful links that improve navigation.
-
+탐색을 향상시키는 의미 있는 링크를 선호하세요.
 ````
 
 ---
 
 ## 9. 30_Rules/Index-and-Log.md 작성
 
-```markdown
-# Index and Log Rules
+````markdown
+# 인덱스 및 로그 규칙 (Index and Log Rules)
 
 ## index.md
 
-Path:
+경로:
 
 ```text
 20_Wiki/index.md
-````
-
-Purpose:
-
-`index.md` is the content-oriented map of the Wiki.
-
-It should help both humans and LLMs quickly find relevant pages.
-
-Maintain this structure:
-
-```markdown
-# LLM Wiki Index
-
-## Overview
-
-## Sources
-
-## Topics
-
-## Concepts
-
-## Entities
-
-## Questions
-
-## Syntheses
-
-## Maintenance
 ```
 
-Each entry should follow this format:
+목적:
+
+`index.md`는 Wiki의 내용 중심 지도입니다.
+
+인간과 LLM 모두가 관련 페이지를 빠르게 찾을 수 있도록 도와야 합니다.
+
+다음 구조를 유지하세요:
 
 ```markdown
-- [[Page Name]] — one-line summary.
+# LLM Wiki 인덱스
+
+## 개요 (Overview)
+
+## 소스 (Sources)
+
+## 토픽 (Topics)
+
+## 개념 (Concepts)
+
+## 엔티티 (Entities)
+
+## 질문 (Questions)
+
+## 합성 (Syntheses)
+
+## 유지보수 (Maintenance)
 ```
 
-Rules:
+각 항목은 다음 형식을 따라야 합니다:
 
-- Update `index.md` whenever new Wiki pages are created.
-- Update `index.md` when page names change.
-- Remove or fix entries that point to missing pages.
-- Keep summaries short and useful.
-- Do not turn `index.md` into a full article.
+```markdown
+- [[페이지 이름]] — 한 줄 요약.
+```
+
+규칙:
+
+- 새 Wiki 페이지가 생성될 때마다 `index.md`를 업데이트합니다.
+- 페이지 이름이 변경될 때 `index.md`를 업데이트합니다.
+- 누락된 페이지를 가리키는 항목을 제거하거나 수정합니다.
+- 요약은 짧고 유용하게 유지합니다.
+- `index.md`를 전체 기사로 만들지 않습니다.
 
 ## log.md
 
-Path:
+경로:
 
 ```text
 20_Wiki/log.md
 ```
 
-Purpose:
+목적:
 
-`log.md` is the chronological record of Wiki operations.
+`log.md`는 Wiki 작업의 시간순 기록입니다.
 
-It should be append-only.
+추가만 가능한(append-only) 방식으로 유지해야 합니다.
 
-Use this format:
+다음 형식을 사용하세요:
 
 ```markdown
-## [YYYY-MM-DD] operation | Title
+## [YYYY-MM-DD] 작업 유형 | 제목
 
-- Operation:
-- Created:
-  - [[Page Name]]
-- Updated:
-  - [[Page Name]]
-- Source:
+- 작업 (Operation):
+- 생성 (Created):
+  - [[페이지 이름]]
+- 수정 (Updated):
+  - [[페이지 이름]]
+- 소스 (Source):
   - 10_Raw/10.01_Clippings/example.md
-- Notes:
+- 비고 (Notes):
   - ...
 ```
 
-Common operation types:
+일반적인 작업 유형:
 
 ```text
 setup
@@ -922,274 +866,269 @@ refactor
 maintenance
 ```
 
-Rules:
+규칙:
 
-- Append a log entry after every meaningful operation.
-- Do not delete old log entries.
-- Do not rewrite history unless correcting a clear formatting error.
-- Keep log entries concise but traceable.
-- Include files created and updated when possible.
-
+- 모든 의미 있는 작업 후 로그 항목을 추가합니다.
+- 오래된 로그 항목을 삭제하지 않습니다.
+- 명확한 서식 오류를 수정하는 경우가 아니라면 기록을 재작성하지 않습니다.
+- 로그 항목을 간결하지만 추적 가능하게 유지합니다.
+- 가능하면 생성된 파일과 수정된 파일을 포함합니다.
 ````
 
 ---
 
 ## 10. 30_Rules/Source-Attribution.md 작성
 
+````markdown
+# 소스 귀속 규칙 (Source Attribution Rules)
+
+## 목적 (Purpose)
+
+Wiki 페이지의 주장은 소스로 추적 가능해야 합니다.
+
+Wiki는 중요한 주장이 어디서 왔는지 명확히 해야 합니다.
+
+## 규칙 (Rules)
+
+1. 가능하면 중요한 주장을 소스 페이지에 링크합니다.
+2. 인용을 조작하지 않습니다.
+3. 소스와 주장 사이의 관계를 조작하지 않습니다.
+4. 주장에 근거가 없으면 약하게 귀속된 것으로 표시합니다.
+5. 소스 메타데이터가 누락된 경우 unknown으로 표시합니다.
+6. Wiki 내에서 링크할 때 원본 소스 경로보다 소스 페이지를 선호합니다.
+
+## 관련 소스 섹션 (Related Sources Section)
+
+적절한 경우 다음과 같은 섹션을 사용하세요:
+
 ```markdown
-# Source Attribution Rules
-
-## Purpose
-
-Claims in Wiki pages should be traceable to sources.
-
-The Wiki should make it clear where important claims came from.
-
-## Rules
-
-1. Link important claims to source pages where possible.
-2. Do not fabricate citations.
-3. Do not fabricate relationships between sources and claims.
-4. If a claim lacks support, mark it as weakly attributed.
-5. If source metadata is missing, mark it as unknown.
-6. Prefer source pages over raw source paths when linking within the Wiki.
-
-## Related Sources Section
-
-Use a section like this when appropriate:
-
-```markdown
-## Related Sources
+## 관련 소스 (Related Sources)
 
 - [[2026-07-07-llm-wiki-pattern]]
-````
-
-## Weak Attribution
-
-If a page makes important claims without a source link, mark it during lint.
-
-Use labels such as:
-
-```text
-Source Needed
-Weakly Attributed
-Needs Verification
 ```
 
+## 약한 귀속 (Weak Attribution)
+
+페이지가 소스 링크 없이 중요한 주장을 할 경우, lint 시 표시하세요.
+
+다음과 같은 레이블을 사용하세요:
+
+```text
+소스 필요 (Source Needed)
+약하게 귀속됨 (Weakly Attributed)
+검증 필요 (Needs Verification)
+```
 ````
 
 ---
 
 ## 11. 30_Rules/Contradictions-and-Uncertainty.md 작성
 
-```markdown
-# Contradictions and Uncertainty Rules
+````markdown
+# 모순 및 불확실성 규칙 (Contradictions and Uncertainty Rules)
 
-## Contradiction Handling
+## 모순 처리 (Contradiction Handling)
 
-When new information conflicts with existing content:
+새로운 정보가 기존 내용과 충돌할 때:
 
-1. Do not silently overwrite the older claim.
-2. Identify both claims.
-3. Link each claim to its supporting source or page.
-4. Mark the conflict under a dedicated section.
+1. 이전 주장을 조용히 덮어쓰지 않습니다.
+2. 두 주장 모두를 식별합니다.
+3. 각 주장을 지원 소스 또는 페이지에 링크합니다.
+4. 전용 섹션 하에 충돌을 표시합니다.
 
-Use section names such as:
-
-```markdown
-## Contradictions / Tensions
-````
-
-or:
+다음과 같은 섹션 이름을 사용하세요:
 
 ```markdown
-## Source Tensions
+## 모순 / 긴장 관계 (Contradictions / Tensions)
 ```
 
-Example wording:
+또는:
 
 ```markdown
-- Source A suggests X, while Source B suggests Y.
-- This may reflect different time periods, definitions, assumptions, or source quality.
-- Needs verification.
+## 소스 긴장 관계 (Source Tensions)
 ```
 
-If the newer source clearly supersedes the older one, state that explicitly and preserve the historical context.
+예시 표현:
 
-## Uncertainty Handling
+```markdown
+- 소스 A는 X를 제안하고, 소스 B는 Y를 제안합니다.
+- 이는 서로 다른 시기, 정의, 가정 또는 소스 품질을 반영할 수 있습니다.
+- 검증이 필요합니다.
+```
 
-Do not hide uncertainty.
+더 새로운 소스가 이전 소스를 명확히 대체하는 경우, 이를 명시적으로 언급하고 역사적 맥락을 보존합니다.
 
-Use explicit markers:
+## 불확실성 처리 (Uncertainty Handling)
+
+불확실성을 숨기지 마세요.
+
+명시적인 표시자를 사용하세요:
 
 ```text
-Uncertain
-Needs Verification
-Open Question
-Partially Supported
-Source Needed
-Weakly Attributed
+불확실 (Uncertain)
+검증 필요 (Needs Verification)
+미해결 질문 (Open Question)
+부분적으로 지원됨 (Partially Supported)
+소스 필요 (Source Needed)
+약하게 귀속됨 (Weakly Attributed)
 ```
 
-## Open Questions
+## 미해결 질문 (Open Questions)
 
-When an issue cannot be resolved, add an open question.
+문제를 해결할 수 없을 때 미해결 질문을 추가하세요.
 
-Example:
+예시:
 
 ```markdown
-## Open Questions
+## 미해결 질문 (Open Questions)
 
-- Does this claim apply generally, or only within the source’s specific context?
-- Is there newer evidence that supersedes this?
+- 이 주장이 일반적으로 적용되는가, 아니면 소스의 특정 맥락 내에서만 적용되는가?
+- 이를 대체하는 더 새로운 증거가 있는가?
 ```
-
 ````
 
 ---
 
 ## 12. 30_Rules/Refactor-Policy.md 작성
 
+````markdown
+# 리팩토링 정책 (Refactor Policy)
+
+## 리팩토링의 정의 (What Counts as Refactor)
+
+리팩토링은 다음을 의미합니다:
+
+- 파일 이름 변경
+- 페이지 이동
+- 페이지 병합
+- 페이지 분할
+- 페이지 삭제
+- 페이지 분류 체계 변경
+- 주요 섹션 재작성
+- `index.md` 구조 변경
+
+## 필수 리팩토링 계획 (Required Refactor Plan)
+
+주요 리팩토링 전에 계획을 작성하세요.
+
+다음 형식을 사용하세요:
+
 ```markdown
-# Refactor Policy
+# 리팩토링 계획 (Refactor Plan)
 
-## What Counts as Refactor
+## 이유 (Reason)
 
-Refactor means:
+## 제안된 변경사항 (Proposed Changes)
 
-- renaming files
-- moving pages
-- merging pages
-- splitting pages
-- deleting pages
-- changing page taxonomy
-- rewriting major sections
-- changing the structure of `index.md`
+## 생성할 파일 (Files to Create)
 
-## Required Refactor Plan
+## 이름 변경할 파일 (Files to Rename)
 
-Before any major refactor, produce a plan.
+## 이동할 파일 (Files to Move)
 
-Use this format:
+## 병합할 파일 (Files to Merge)
 
-```markdown
-# Refactor Plan
+## 삭제할 파일 (Files to Delete)
 
-## Reason
+## 업데이트할 링크 (Links to Update)
 
-## Proposed Changes
+## 위험 요소 (Risks)
 
-## Files to Create
+## 승인 필요 여부 (Confirmation Needed)
+```
 
-## Files to Rename
+## 파괴적인 변경 (Destructive Changes)
 
-## Files to Move
+사용자 승인 없이 파괴적인 리팩토링을 수행하지 마세요.
 
-## Files to Merge
+파괴적인 변경에는 다음이 포함됩니다:
 
-## Files to Delete
+- 페이지 삭제
+- 페이지 병합
+- 페이지 이름 변경
+- 대용량 파일 세트 이동
+- 주요 섹션 교체
+- 한쪽을 제거하여 모순 해결
 
-## Links to Update
+## 안전한 변경 (Safe Changes)
 
-## Risks
+별도의 승인이 필요 없는 안전한 작업:
 
-## Confirmation Needed
-````
-
-## Destructive Changes
-
-Do not perform destructive refactors without user approval.
-
-Destructive changes include:
-
-- deleting pages
-- merging pages
-- renaming pages
-- moving large sets of files
-- replacing major sections
-- resolving contradictions by removing one side
-
-## Safe Changes
-
-Safe actions that do not require separate approval:
-
-- creating missing directories
-- creating missing starter files
-- adding a new page during ingest
-- updating index after page creation
-- appending to log
-- creating lint reports
-- adding missing frontmatter to newly created pages
-
+- 누락된 디렉터리 생성
+- 누락된 초기 파일 생성
+- 수집 중 새 페이지 추가
+- 페이지 생성 후 인덱스 업데이트
+- 로그에 내용 추가
+- lint 보고서 생성
+- 새로 생성된 페이지에 누락된 frontmatter 추가
 ````
 
 ---
 
 ## 13. 30_Rules/Operation-Reporting.md 작성
 
+````markdown
+# 작업 보고 규칙 (Operation Reporting Rules)
+
+## 목적 (Purpose)
+
+모든 의미 있는 Wiki 작업은 간결한 보고서로 마무리해야 합니다.
+
+보고서는 다음을 명확히 해야 합니다:
+
+- 무엇을 했는가
+- 어떤 스킬을 사용했는가
+- 어떤 규칙 파일을 사용했는가
+- 어떤 파일을 생성했는가
+- 어떤 파일을 수정했는가
+- 원본 소스를 수정했는가
+- 무엇이 불확실한가
+- 다음에 무엇을 해야 하는가
+
+## 표준 보고서 형식 (Standard Report Format)
+
+다음 형식을 사용하세요:
+
 ```markdown
-# Operation Reporting Rules
+# LLM Wiki 작업 보고서 (LLM Wiki Operation Report)
 
-## Purpose
+## 상태 (Status)
+완료 / 부분 완료 / 실패
 
-Every meaningful Wiki operation should end with a concise report.
+## 사용한 스킬 (Skill Used)
+Ingest / Query / Lint / 없음 / 복수
 
-The report should make it clear:
-
-- what was done
-- which skill was used
-- which rule files were used
-- what files were created
-- what files were updated
-- whether raw sources were modified
-- what remains uncertain
-- what to do next
-
-## Standard Report Format
-
-Use this format:
-
-```markdown
-# LLM Wiki Operation Report
-
-## Status
-Complete / Partial / Failed
-
-## Skill Used
-Ingest / Query / Lint / None / Multiple
-
-## Rule Files Used
+## 사용한 규칙 파일 (Rule Files Used)
 - ...
 
-## Created Files
+## 생성한 파일 (Created Files)
 - ...
 
-## Updated Files
+## 수정한 파일 (Updated Files)
 - ...
 
-## Raw Sources Modified
-No
+## 원본 소스 수정 여부 (Raw Sources Modified)
+없음
 
-## Key Decisions
+## 주요 결정 사항 (Key Decisions)
 - ...
 
-## Issues / Uncertainties
+## 문제 / 불확실성 (Issues / Uncertainties)
 - ...
 
-## Recommended Next Steps
+## 권장 다음 단계 (Recommended Next Steps)
 1. ...
 2. ...
 3. ...
-````
+```
 
-## Reporting Rules
+## 보고 규칙 (Reporting Rules)
 
-- If no files were changed, say so clearly.
-- If a task partially failed, explain what succeeded and what failed.
-- If a source could not be read, identify the source and the reason.
-- If assumptions were made, list them.
-- Keep the report concise.
-
+- 변경된 파일이 없으면 명확히 말하세요.
+- 작업이 부분적으로 실패한 경우 성공한 것과 실패한 것을 설명하세요.
+- 소스를 읽을 수 없었다면 소스와 이유를 식별하세요.
+- 가정을 했다면 목록에 나열하세요.
+- 보고서를 간결하게 유지하세요.
 ````
 
 ---
@@ -1223,42 +1162,42 @@ Skill 원본 파일은 `80_References/80.02_WIKI_installation/` 폴더에 있습
 ### 20_Wiki/index.md
 
 ```markdown
-# LLM Wiki Index
+# LLM Wiki 인덱스 (LLM Wiki Index)
 
-## Overview
-- [[overview]] — High-level summary of the Wiki.
+## 개요 (Overview)
+- [[overview]] — Wiki의 상위 수준 요약.
 
-## Sources
+## 소스 (Sources)
 
-## Topics
+## 토픽 (Topics)
 
-## Concepts
+## 개념 (Concepts)
 
-## Entities
+## 엔티티 (Entities)
 
-## Questions
+## 질문 (Questions)
 
-## Syntheses
+## 합성 (Syntheses)
 
-## Maintenance
+## 유지보수 (Maintenance)
 ```
 
 ### 20_Wiki/log.md
 
 ```markdown
-# LLM Wiki Log
+# LLM Wiki 로그 (LLM Wiki Log)
 
-## [YYYY-MM-DD] setup | Initial Modular Rule Structure
+## [YYYY-MM-DD] setup | 초기 모듈식 규칙 구조 구축
 
-- Operation: setup
-- Created:
+- 작업 (Operation): setup
+- 생성 (Created):
   - [[index]]
   - [[log]]
   - [[overview]]
-- Updated:
-  - None
-- Notes:
-  - Created initial LLM Wiki structure with modular rule files.
+- 수정 (Updated):
+  - 없음
+- 비고 (Notes):
+  - 모듈식 규칙 파일을 포함한 초기 LLM Wiki 구조를 생성했습니다.
 ```
 
 ### 20_Wiki/overview.md
@@ -1266,34 +1205,34 @@ Skill 원본 파일은 `80_References/80.02_WIKI_installation/` 폴더에 있습
 ```markdown
 ---
 type: overview
-title: Wiki Overview
+title: Wiki 개요
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 tags:
   - overview
 ---
 
-# Wiki Overview
+# Wiki 개요 (Wiki Overview)
 
-## Purpose
+## 목적 (Purpose)
 
-This Wiki is a persistent Markdown knowledge base maintained by an LLM.
+이 Wiki는 LLM이 유지보수하는 지속적인 Markdown 지식 베이스입니다.
 
-## Major Topics
+## 주요 토픽 (Major Topics)
 
-No major topics yet.
+아직 주요 토픽이 없습니다.
 
-## Current Syntheses
+## 현재 합성 (Current Syntheses)
 
-No syntheses yet.
+아직 합성이 없습니다.
 
-## Open Questions
+## 미해결 질문 (Open Questions)
 
-No open questions yet.
+아직 미해결 질문이 없습니다.
 
-## Next Steps
+## 다음 단계 (Next Steps)
 
-Add sources to `10_Raw/10.02_Inbox/` or `10_Raw/10.01_Clippings/` and run the ingest skill.
+소스를 `10_Raw/10.02_Inbox/` 또는 `10_Raw/10.01_Clippings/`에 추가하고 ingest 스킬을 실행하세요.
 ```
 
 ---
@@ -1303,15 +1242,15 @@ Add sources to `10_Raw/10.02_Inbox/` or `10_Raw/10.01_Clippings/` and run the in
 작업을 마친 뒤 다음 형식으로 보고하세요.
 
 ```markdown
-# LLM Wiki Operation Report
+# LLM Wiki 작업 보고서 (LLM Wiki Operation Report)
 
-## Status
-Complete / Partial / Failed
+## 상태 (Status)
+완료 / 부분 완료 / 실패
 
-## Skill Used
-None
+## 사용한 스킬 (Skill Used)
+없음
 
-## Rule Files Used
+## 사용한 규칙 파일 (Rule Files Used)
 - CLAUDE.md
 - AGENTS.md
 - GEMINI.md
@@ -1326,25 +1265,25 @@ None
 - 30_Rules/Refactor-Policy.md
 - 30_Rules/Operation-Reporting.md
 
-## Created Files
+## 생성한 파일 (Created Files)
 - ...
 
-## Updated Files
+## 수정한 파일 (Updated Files)
 - ...
 
-## Raw Sources Modified
-No
+## 원본 소스 수정 여부 (Raw Sources Modified)
+없음
 
-## Key Decisions
-- Kept CLAUDE.md, AGENTS.md, and GEMINI.md minimal.
-- Moved detailed rules into modular files under 30_Rules/.
-- Kept skills under project-local directories (.claude/skills, .codex/skills, .agent/skills), separate from global rules.
+## 주요 결정 사항 (Key Decisions)
+- CLAUDE.md, AGENTS.md, GEMINI.md를 최소화된 형태로 유지했습니다.
+- 세부 규칙을 30_Rules/ 하위의 모듈식 파일로 이동했습니다.
+- 스킬은 전역 규칙과 분리하여 프로젝트-local 디렉터리(.claude/skills, .codex/skills, .agent/skills) 하위에 유지했습니다.
 
-## Issues / Uncertainties
+## 문제 / 불확실성 (Issues / Uncertainties)
 - ...
 
-## Recommended Next Steps
-1. Review the generated Ingest Skill from `80_References/80.02_WIKI_installation/Ingest Skill.md`.
-2. Review the generated Query Skill from `80_References/80.02_WIKI_installation/Query Skill.md`.
-3. Review the generated Lint Skill from `80_References/80.02_WIKI_installation/Lint Skill.md`.
+## 권장 다음 단계 (Recommended Next Steps)
+1. `80_References/80.02_WIKI_installation/Ingest Skill.md`에서 생성된 Ingest 스킬을 검토하세요.
+2. `80_References/80.02_WIKI_installation/Query Skill.md`에서 생성된 Query 스킬을 검토하세요.
+3. `80_References/80.02_WIKI_installation/Lint Skill.md`에서 생성된 Lint 스킬을 검토하세요.
 ```

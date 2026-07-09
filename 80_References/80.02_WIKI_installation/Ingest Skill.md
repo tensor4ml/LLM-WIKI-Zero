@@ -1,62 +1,45 @@
 ---
 name: ingest
-description: Use this skill when the user asks to ingest, process, import, summarize, or integrate a new source into the LLM Wiki
+description: 사용자가 새로운 소스를 LLM Wiki에 수집, 처리, 가져오기, 요약, 또는 통합 요청 시 이 스킬을 사용합니다.
 ---
 
-# Ingest Skill
+# Ingest 스킬 (Ingest Skill)
 
-## Purpose
+## 목적 (Purpose)
 
-Use this skill when the user asks to ingest, process, import, summarize, or integrate a new source into the LLM Wiki.
+사용자가 새로운 소스를 LLM Wiki에 수집, 처리, 가져오기, 요약, 또는 통합 요청 시 이 스킬을 사용합니다.
 
-The goal of ingestion is not only to summarize a source.  
-The goal is to integrate the source into the persistent Markdown Wiki by creating and updating source pages, concept pages, entity pages, topic pages, synthesis pages, index entries, and log entries.
+수집의 목표는 단순히 소스를 요약하는 것이 아닙니다.  
+목표는 소스 페이지, 개념 페이지, 엔티티 페이지, 토픽 페이지, 합성 페이지, 인덱스 항목, 로그 항목을 생성 및 업데이트하여 소스를 지속적인 Markdown Wiki에 통합하는 것입니다.
 
-## When to Use This Skill
+## 이 스킬을 사용하는 경우 (When to Use This Skill)
 
-Use this skill when the user says things like:
+사용자가 다음과 같이 말할 때 이 스킬을 사용하세요:
 
-- "Ingest this source."
-    
-- "Process the new document."
-    
-- "Add this article to the wiki."
-    
-- "Import the files in 10_Raw/10.02_Inbox."
-    
-- "Read this paper and update the wiki."
-    
+- "이 소스를 수집해줘."
+- "새 문서를 처리해줘."
+- "이 기사를 Wiki에 추가해줘."
+- "10_Raw/10.02_Inbox의 파일을 가져와줘."
+- "이 논문을 읽고 Wiki를 업데이트해줘."
 - "이 문서를 Wiki에 반영해줘."
-    
 - "새 자료를 LLM Wiki에 넣어줘."
-    
 
-## Core Rules
+## 핵심 규칙 (Core Rules)
 
-1. Never modify files under `10_Raw/`.
-    
-2. Treat raw sources as immutable source-of-truth documents.
-    
-3. Create or update Markdown files only under `20_Wiki/`, unless explicitly instructed otherwise.
-    
-4. Every created or updated Wiki page must use YAML frontmatter.
-    
-5. Use Obsidian-style links: `[[Page Name]]`.
-    
-6. Do not invent claims that are not supported by the source.
-    
-7. Mark uncertain claims explicitly.
-    
-8. If a new source contradicts existing Wiki content, record the contradiction instead of silently overwriting the old claim.
-    
-9. Update `20_Wiki/index.md` after every ingest.
-    
-10. Append an entry to `20_Wiki/log.md` after every ingest.
-    
+1. `10_Raw/` 하위의 파일을 절대 수정하지 않습니다.
+2. 원본 소스는 불변의 진실의 원천 문서로 취급합니다.
+3. 명시적으로 지시받지 않는 한 `20_Wiki/` 하위에만 Markdown 파일을 생성하거나 업데이트합니다.
+4. 생성 또는 업데이트된 모든 Wiki 페이지는 YAML frontmatter를 사용해야 합니다.
+5. Obsidian 스타일 링크를 사용합니다: `[[페이지 이름]]`.
+6. 소스에 근거하지 않은 주장을 만들어내지 않습니다.
+7. 불확실한 주장은 명시적으로 표시합니다.
+8. 새 소스가 기존 Wiki 내용과 충돌하는 경우, 이전 주장을 조용히 덮어쓰는 대신 충돌을 기록합니다.
+9. 매 수집 후 `20_Wiki/index.md`를 업데이트합니다.
+10. 매 수집 후 `20_Wiki/log.md`에 항목을 추가합니다.
 
-## Expected Directory Structure
+## 예상 디렉터리 구조 (Expected Directory Structure)
 
-Assume this structure:
+다음 구조를 가정합니다:
 
 ```text
 llm-wiki/
@@ -86,79 +69,64 @@ llm-wiki/
 └─ 30_Rules/
 ```
 
-If the expected structure is missing, create the missing directories and files before continuing.
+예상 구조가 없는 경우, 계속하기 전에 누락된 디렉터리와 파일을 생성합니다.
 
-## Ingest Workflow
+## Ingest 워크플로우 (Ingest Workflow)
 
-Follow this sequence.
+다음 순서를 따르세요.
 
-### 1. Locate Source
+### 1. 소스 위치 확인 (Locate Source)
 
-Check the source location provided by the user.
+사용자가 제공한 소스 위치를 확인합니다.
 
-If no specific file is named, inspect:
+특정 파일이 지정되지 않은 경우 다음을 검사합니다:
 
 ```text
 10_Raw/10.02_Inbox/
 10_Raw/10.01_Clippings/
 ```
 
-Identify unprocessed sources.
+미처리 소스를 식별합니다.
 
-### 2. Read Source
+### 2. 소스 읽기 (Read Source)
 
-Read the source carefully.
+소스를 꼼꼼히 읽습니다.
 
-Extract:
+다음 항목을 추출합니다:
 
-- title
-    
-- author or origin if available
-    
-- date if available
-    
-- source type
-    
-- main argument
-    
-- key claims
-    
-- important facts
-    
-- definitions
-    
-- examples
-    
-- entities
-    
-- tools
-    
-- concepts
-    
-- tensions or contradictions
-    
-- open questions
-    
-- possible follow-up topics
-    
+- 제목
+- 가능한 경우 저자 또는 출처
+- 가능한 경우 날짜
+- 소스 유형
+- 주요 논거
+- 핵심 주장
+- 중요한 사실
+- 정의
+- 예시
+- 엔티티
+- 도구
+- 개념
+- 긴장 관계 또는 모순
+- 미해결 질문
+- 가능한 후속 토픽
 
-### 3. Create Source Page
+### 3. 소스 페이지 생성 (Create Source Page)
 
-Create a source summary page in:
+다음 경로에 소스 요약 페이지를 생성합니다:
 
 ```text
 20_Wiki/20.01_Sources/
 ```
 
-Use lowercase kebab-case filename.
+소문자 케밥 케이스 파일명을 사용합니다.
 
-Example:
+예시:
 
 ```text
 20_Wiki/20.01_Sources/2026-07-07-llm-wiki-pattern.md
 ```
 
-Use this format:
+다음 형식을 사용합니다:
 
 ```markdown
 ---
@@ -171,53 +139,47 @@ status: processed
 tags:
 ---
 
-# Source Title
+# 소스 제목
 
-## Summary
+## 요약 (Summary)
 
-## Key Claims
+## 핵심 주장 (Key Claims)
 
-## Important Details
+## 중요한 세부 정보 (Important Details)
 
-## Evidence
+## 증거 (Evidence)
 
-## Related Concepts
+## 관련 개념 (Related Concepts)
 
-## Related Entities
+## 관련 엔티티 (Related Entities)
 
-## Related Topics
+## 관련 토픽 (Related Topics)
 
-## Contradictions / Tensions
+## 모순 / 긴장 관계 (Contradictions / Tensions)
 
-## Open Questions
+## 미해결 질문 (Open Questions)
 
-## Source Notes
+## 소스 비고 (Source Notes)
 ```
 
-### 4. Create or Update Concept Pages
+### 4. 개념 페이지 생성 또는 업데이트 (Create or Update Concept Pages)
 
-For each important concept, create or update a page in:
+각 중요한 개념에 대해 다음 경로에 페이지를 생성하거나 업데이트합니다:
 
 ```text
 20_Wiki/20.02_Concepts/
 ```
 
-Concept examples:
+개념 예시:
 
 - RAG
-    
-- Persistent Knowledge Base
-    
-- Wiki Ingestion
-    
-- Wiki Linting
-    
-- Knowledge Compounding
-    
-- Cross-Reference Maintenance
-    
+- 지속적 지식 베이스 (Persistent Knowledge Base)
+- Wiki 수집 (Wiki Ingestion)
+- Wiki 린팅 (Wiki Linting)
+- 지식 복합화 (Knowledge Compounding)
+- 교차 참조 유지보수 (Cross-Reference Maintenance)
 
-Use this format:
+다음 형식을 사용합니다:
 
 ```markdown
 ---
@@ -229,47 +191,40 @@ aliases:
 tags:
 ---
 
-# Concept Name
+# 개념 이름
 
-## Definition
+## 정의 (Definition)
 
-## Why It Matters
+## 중요성 (Why It Matters)
 
-## Key Points
+## 핵심 포인트 (Key Points)
 
-## Related Concepts
+## 관련 개념 (Related Concepts)
 
-## Related Sources
+## 관련 소스 (Related Sources)
 
-## Open Questions
+## 미해결 질문 (Open Questions)
 ```
 
-### 5. Create or Update Entity Pages
+### 5. 엔티티 페이지 생성 또는 업데이트 (Create or Update Entity Pages)
 
-For each person, organization, product, tool, system, location, or named object, create or update a page in:
+각 인물, 조직, 제품, 도구, 시스템, 위치 또는 명명된 객체에 대해 다음 경로에 페이지를 생성하거나 업데이트합니다:
 
 ```text
 20_Wiki/20.03_Entities/
 ```
 
-Entity examples:
+엔티티 예시:
 
 - Obsidian
-    
 - NotebookLM
-    
 - ChatGPT
-    
 - qmd
-    
 - Marp
-    
 - Dataview
-    
 - Obsidian Web Clipper
-    
 
-Use this format:
+다음 형식을 사용합니다:
 
 ```markdown
 ---
@@ -282,41 +237,37 @@ aliases:
 tags:
 ---
 
-# Entity Name
+# 엔티티 이름
 
-## Description
+## 설명 (Description)
 
-## Role / Relevance
+## 역할 / 관련성 (Role / Relevance)
 
-## Key Details
+## 핵심 세부 정보 (Key Details)
 
-## Related Concepts
+## 관련 개념 (Related Concepts)
 
-## Related Sources
+## 관련 소스 (Related Sources)
 
-## Open Questions
+## 미해결 질문 (Open Questions)
 ```
 
-### 6. Create or Update Topic Pages
+### 6. 토픽 페이지 생성 또는 업데이트 (Create or Update Topic Pages)
 
-For broader subject areas, create or update pages in:
+더 넓은 주제 영역에 대해 다음 경로에 페이지를 생성하거나 업데이트합니다:
 
 ```text
 20_Wiki/20.04_Topics/
 ```
 
-Topic examples:
+토픽 예시:
 
-- Personal Knowledge Management
-    
-- LLM-Assisted Research
-    
-- Markdown Wiki Workflow
-    
-- Internal Team Knowledge Bases
-    
+- 개인 지식 관리 (Personal Knowledge Management)
+- LLM 보조 연구 (LLM-Assisted Research)
+- Markdown Wiki 워크플로우 (Markdown Wiki Workflow)
+- 내부 팀 지식 베이스 (Internal Team Knowledge Bases)
 
-Use this format:
+다음 형식을 사용합니다:
 
 ```markdown
 ---
@@ -327,30 +278,30 @@ updated:
 tags:
 ---
 
-# Topic Name
+# 토픽 이름
 
-## Overview
+## 개요 (Overview)
 
-## Key Concepts
+## 핵심 개념 (Key Concepts)
 
-## Important Sources
+## 중요한 소스 (Important Sources)
 
-## Related Entities
+## 관련 엔티티 (Related Entities)
 
-## Current Synthesis
+## 현재 합성 (Current Synthesis)
 
-## Open Questions
+## 미해결 질문 (Open Questions)
 ```
 
-### 7. Create or Update Synthesis Pages
+### 7. 합성 페이지 생성 또는 업데이트 (Create or Update Synthesis Pages)
 
-If ingestion creates a useful cross-source comparison, argument, or integrated insight, create or update a page in:
+수집 과정에서 유용한 교차 소스 비교, 논거 또는 통합된 인사이트가 생성되는 경우 다음 경로에 페이지를 생성하거나 업데이트합니다:
 
 ```text
 20_Wiki/20.06_Syntheses/
 ```
 
-Use this format:
+다음 형식을 사용합니다:
 
 ```markdown
 ---
@@ -361,28 +312,28 @@ updated:
 tags:
 ---
 
-# Synthesis Title
+# 합성 제목
 
-## Core Argument
+## 핵심 논거 (Core Argument)
 
-## Supporting Evidence
+## 지원 증거 (Supporting Evidence)
 
-## Comparison / Analysis
+## 비교 / 분석 (Comparison / Analysis)
 
-## Implications
+## 시사점 (Implications)
 
-## Related Sources
+## 관련 소스 (Related Sources)
 
-## Related Concepts
+## 관련 개념 (Related Concepts)
 
-## Open Questions
+## 미해결 질문 (Open Questions)
 ```
 
-### 8. Update Links
+### 8. 링크 업데이트 (Update Links)
 
-Add Obsidian-style links across pages.
+페이지 전체에 Obsidian 스타일 링크를 추가합니다.
 
-Examples:
+예시:
 
 ```markdown
 - [[RAG]]
@@ -391,112 +342,112 @@ Examples:
 - [[Obsidian]]
 ```
 
-Every source page should link to related concept, entity, and topic pages.
+모든 소스 페이지는 관련 개념, 엔티티, 토픽 페이지에 링크해야 합니다.
 
-Every concept, entity, and topic page should link back to relevant source pages.
+모든 개념, 엔티티, 토픽 페이지는 관련 소스 페이지로 역링크해야 합니다.
 
-### 9. Update index.md
+### 9. index.md 업데이트 (Update index.md)
 
-Update:
+다음 파일을 업데이트합니다:
 
 ```text
 20_Wiki/index.md
 ```
 
-Maintain these sections:
+다음 섹션들을 유지합니다:
 
 ```markdown
-# LLM Wiki Index
+# LLM Wiki 인덱스
 
-## Overview
+## 개요
 
-## Sources
+## 소스
 
-## Topics
+## 토픽
 
-## Concepts
+## 개념
 
-## Entities
+## 엔티티
 
-## Questions
+## 질문
 
-## Syntheses
+## 합성
 
-## Maintenance
+## 유지보수
 ```
 
-Each entry should use this format:
+각 항목은 다음 형식을 사용합니다:
 
 ```markdown
-- [[Page Name]] — one-line summary.
+- [[페이지 이름]] — 한 줄 요약.
 ```
 
-### 10. Update log.md
+### 10. log.md 업데이트 (Update log.md)
 
-Append a new entry to:
+다음 파일에 새 항목을 추가합니다:
 
 ```text
 20_Wiki/log.md
 ```
 
-Use this format:
+다음 형식을 사용합니다:
 
 ```markdown
-## [YYYY-MM-DD] ingest | Source Title
+## [YYYY-MM-DD] ingest | 소스 제목
 
-- Operation: ingest
-- Source:
+- 작업 (Operation): ingest
+- 소스 (Source):
   - 10_Raw/10.01_Clippings/example.md
-- Created:
-  - [[Page Name]]
-- Updated:
-  - [[Page Name]]
-- Notes:
+- 생성 (Created):
+  - [[페이지 이름]]
+- 수정 (Updated):
+  - [[페이지 이름]]
+- 비고 (Notes):
   - ...
 ```
 
-Do not delete or rewrite old log entries.
+이전 로그 항목을 삭제하거나 재작성하지 않습니다.
 
-## Completion Report
+## 완료 보고 (Completion Report)
 
-After ingestion, report:
+수집 후 다음과 같이 보고합니다:
 
 ```markdown
-# Ingest Report
+# Ingest 보고서 (Ingest Report)
 
-## Status
-Complete / Partial / Failed
+## 상태 (Status)
+완료 / 부분 완료 / 실패
 
-## Source Processed
+## 처리된 소스 (Source Processed)
 - ...
 
-## Created Files
+## 생성한 파일 (Created Files)
 - ...
 
-## Updated Files
+## 수정한 파일 (Updated Files)
 - ...
 
-## Key Takeaways
+## 핵심 인사이트 (Key Takeaways)
 - ...
 
-## Contradictions / Tensions
+## 모순 / 긴장 관계 (Contradictions / Tensions)
 - ...
 
-## Open Questions
+## 미해결 질문 (Open Questions)
 - ...
 
-## Recommended Next Steps
+## 권장 다음 단계 (Recommended Next Steps)
 1. ...
 2. ...
 3. ...
 ```
 
-## Failure Handling
+## 오류 처리 (Failure Handling)
 
-If a source cannot be read, report the issue clearly.
+소스를 읽을 수 없는 경우 문제를 명확히 보고합니다.
 
-If the source is too large, process it in sections.
+소스가 너무 큰 경우 섹션별로 처리합니다.
 
-If the source contains images, first process the text, then inspect referenced images when possible.
+소스에 이미지가 포함된 경우 먼저 텍스트를 처리한 후 가능한 경우 참조된 이미지를 검사합니다.
 
-If the existing Wiki structure is inconsistent, preserve existing content and report the inconsistency before making major changes.
+기존 Wiki 구조가 일관성이 없는 경우 기존 내용을 보존하고 주요 변경 전에 불일치를 보고합니다.

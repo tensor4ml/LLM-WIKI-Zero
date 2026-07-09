@@ -1,67 +1,48 @@
 ---
 name: lint
-description: Use this skill to inspect, clean, and improve the health of the LLM Wiki.
+description: LLM Wiki의 상태를 검사, 정리, 개선할 때 이 스킬을 사용합니다.
 ---
 
-# Lint Skill
+# Lint 스킬 (Lint Skill)
 
-## Purpose
+## 목적 (Purpose)
 
-Use this skill to inspect, clean, and improve the health of the LLM Wiki.
+LLM Wiki의 상태를 검사, 정리, 개선할 때 이 스킬을 사용합니다.
 
-The goal is to keep the Wiki coherent as it grows by finding broken links, orphan pages, duplicate concepts, stale claims, missing pages, weak source attribution, and structural problems.
+목표는 깨진 링크, 고아 페이지, 중복 개념, 오래된 주장, 누락된 페이지, 약한 소스 귀속, 구조적 문제를 찾아 Wiki가 성장함에 따라 일관성을 유지하는 것입니다.
 
-## When to Use This Skill
+## 이 스킬을 사용하는 경우 (When to Use This Skill)
 
-Use this skill when the user says things like:
+사용자가 다음과 같이 말할 때 이 스킬을 사용하세요:
 
-- "Lint the wiki."
-    
-- "Health-check the wiki."
-    
-- "Find broken links."
-    
-- "Find orphan pages."
-    
-- "Check for contradictions."
-    
-- "Clean up the wiki."
-    
+- "Wiki를 린트해줘."
 - "Wiki 상태 점검해줘."
-    
+- "깨진 링크를 찾아줘."
+- "고아 페이지를 찾아줘."
+- "모순을 확인해줘."
+- "Wiki를 정리해줘."
+- "Wiki 상태 점검해줘."
 - "중복 페이지 찾아줘."
-    
 - "링크 깨진 것 확인해줘."
-    
 
-## Core Rules
+## 핵심 규칙 (Core Rules)
 
-1. Do not modify raw sources.
-    
-2. Do not delete Wiki pages without explicit user approval.
-    
-3. Do not perform large refactors without first proposing a plan.
-    
-4. Prefer reporting issues before making destructive changes.
-    
-5. Update `20_Wiki/log.md` after every lint pass.
-    
-6. If creating a lint report, save it under `20_Wiki/20.06_Syntheses/`.
-    
-7. Update `20_Wiki/index.md` if new maintenance pages are created.
-    
-8. Preserve existing content unless there is a clear reason to change it.
-    
-9. Surface contradictions instead of hiding them.
-    
-10. Recommend next actions in priority order.
-    
+1. 원본 소스를 수정하지 않습니다.
+2. 사용자의 명시적인 승인 없이 Wiki 페이지를 삭제하지 않습니다.
+3. 먼저 계획을 제안하지 않고 대규모 리팩토링을 수행하지 않습니다.
+4. 파괴적인 변경 전에 먼저 문제를 보고하는 것을 선호합니다.
+5. 매 lint 과정 후 `20_Wiki/log.md`를 업데이트합니다.
+6. lint 보고서를 생성하는 경우 `20_Wiki/20.06_Syntheses/` 하위에 저장합니다.
+7. 새 유지보수 페이지가 생성되면 `20_Wiki/index.md`를 업데이트합니다.
+8. 명확한 이유가 없는 한 기존 내용을 보존합니다.
+9. 모순을 숨기는 대신 드러냅니다.
+10. 우선순위 순서로 다음 조치를 권장합니다.
 
-## Lint Workflow
+## Lint 워크플로우 (Lint Workflow)
 
-### 1. Inspect Wiki Structure
+### 1. Wiki 구조 검사 (Inspect Wiki Structure)
 
-Check that these paths exist:
+다음 경로들이 존재하는지 확인합니다:
 
 ```text
 20_Wiki/index.md
@@ -76,226 +57,205 @@ Check that these paths exist:
 20_Wiki/20.07_Templates/
 ```
 
-Report missing files or directories.
+누락된 파일 또는 디렉터리를 보고합니다.
 
-### 2. Check index.md
+### 2. index.md 확인 (Check index.md)
 
-Inspect:
+다음 파일을 검사합니다:
 
 ```text
 20_Wiki/index.md
 ```
 
-Look for:
+다음 항목을 찾습니다:
 
-- pages listed in index but missing from disk
-    
-- pages on disk missing from index
-    
-- duplicate index entries
-    
-- pages under the wrong section
-    
-- unclear one-line summaries
-    
-- stale entries
-    
+- 인덱스에 나열되어 있으나 디스크에 없는 페이지
+- 디스크에 있으나 인덱스에 없는 페이지
+- 중복 인덱스 항목
+- 잘못된 섹션에 있는 페이지
+- 불명확한 한 줄 요약
+- 오래된 항목
 
-### 3. Check log.md
+### 3. log.md 확인 (Check log.md)
 
-Inspect:
+다음 파일을 검사합니다:
 
 ```text
 20_Wiki/log.md
 ```
 
-Look for:
+다음 항목을 찾습니다:
 
-- missing recent operations
-    
-- inconsistent log headings
-    
-- non-append-only edits
-    
-- entries without operation type
-    
-- entries without created or updated files
-    
-- entries without notes
-    
+- 최근 작업의 누락
+- 일관성 없는 로그 헤딩
+- 추가 전용(append-only) 원칙을 벗어난 편집
+- 작업 유형이 없는 항목
+- 생성 또는 수정된 파일이 없는 항목
+- 비고가 없는 항목
 
-Expected log format:
+예상 로그 형식:
 
 ```markdown
-## [YYYY-MM-DD] operation | Title
+## [YYYY-MM-DD] 작업 유형 | 제목
 
-- Operation:
-- Created:
-- Updated:
-- Notes:
+- 작업 (Operation):
+- 생성 (Created):
+- 수정 (Updated):
+- 비고 (Notes):
 ```
 
-### 4. Check Broken Links
+### 4. 깨진 링크 확인 (Check Broken Links)
 
-Scan Wiki files for Obsidian-style links:
+Wiki 파일에서 Obsidian 스타일 링크를 스캔합니다:
 
 ```markdown
-[[Page Name]]
+[[페이지 이름]]
 ```
 
-Detect links that do not resolve to existing pages.
+기존 페이지로 연결되지 않는 링크를 감지합니다.
 
-Report:
+보고합니다:
 
 ```markdown
-## Broken Links
+## 깨진 링크 (Broken Links)
 
-- `[[Missing Page]]`
-  - Found in: path/to/file.md
-  - Suggested action: create page / rename link / remove link
+- `[[누락된 페이지]]`
+  - 발견 위치: path/to/file.md
+  - 권장 조치: 페이지 생성 / 링크 이름 변경 / 링크 제거
 ```
 
-### 5. Check Orphan Pages
+### 5. 고아 페이지 확인 (Check Orphan Pages)
 
-Find pages with no inbound links.
+인바운드 링크가 없는 페이지를 찾습니다.
 
-Report:
+보고합니다:
 
 ```markdown
-## Orphan Pages
+## 고아 페이지 (Orphan Pages)
 
 - path/to/page.md
-  - Suggested inbound links:
-    - [[Related Page]]
+  - 권장 인바운드 링크:
+    - [[관련 페이지]]
 ```
 
-Do not classify `index.md`, `log.md`, or standalone maintenance reports as problematic orphans unless they are clearly disconnected from the workflow.
+`index.md`, `log.md`, 또는 독립형 유지보수 보고서는 워크플로우에서 명확히 분리되어 있지 않는 한 문제가 있는 고아로 분류하지 않습니다.
 
-### 6. Check Duplicate or Overlapping Pages
+### 6. 중복 또는 겹치는 페이지 확인 (Check Duplicate or Overlapping Pages)
 
-Look for pages that appear to cover the same concept.
+동일한 개념을 다루는 것으로 보이는 페이지를 찾습니다.
 
-Examples:
+예시:
 
-- `rag.md` and `retrieval-augmented-generation.md`
-    
-- `llm-wiki.md` and `persistent-llm-wiki.md`
-    
-- `obsidian.md` and `obsidian-tool.md`
-    
+- `rag.md`와 `retrieval-augmented-generation.md`
+- `llm-wiki.md`와 `persistent-llm-wiki.md`
+- `obsidian.md`와 `obsidian-tool.md`
 
-Report:
+보고합니다:
 
 ```markdown
-## Duplicate / Overlapping Pages
+## 중복 / 겹치는 페이지 (Duplicate / Overlapping Pages)
 
-- Candidate group:
+- 후보 그룹:
   - path/to/page-a.md
   - path/to/page-b.md
-- Issue:
-- Recommendation:
-  - merge / rename / keep separate with clearer distinction
+- 문제:
+- 권장사항:
+  - 병합 / 이름 변경 / 더 명확한 구분으로 별도 유지
 ```
 
-### 7. Check Stale or Contradictory Claims
+### 7. 오래되거나 모순된 주장 확인 (Check Stale or Contradictory Claims)
 
-Look for claims that conflict across pages.
+페이지 간에 충돌하는 주장을 찾습니다.
 
-Report:
+보고합니다:
 
 ```markdown
-## Contradictions / Tensions
+## 모순 / 긴장 관계 (Contradictions / Tensions)
 
-- Claim A:
-  - Page:
-  - Evidence:
-- Claim B:
-  - Page:
-  - Evidence:
-- Recommendation:
+- 주장 A:
+  - 페이지:
+  - 증거:
+- 주장 B:
+  - 페이지:
+  - 증거:
+- 권장사항:
 ```
 
-Do not silently choose one claim unless the evidence clearly supports it.
+증거가 명확히 하나의 주장을 지지하지 않는 한 조용히 하나의 주장을 선택하지 않습니다.
 
-### 8. Check Missing Pages
+### 8. 누락된 페이지 확인 (Check Missing Pages)
 
-Find frequently mentioned concepts, entities, tools, or topics that lack pages.
+자주 언급되지만 페이지가 없는 개념, 엔티티, 도구 또는 토픽을 찾습니다.
 
-Report:
+보고합니다:
 
 ```markdown
-## Missing Pages to Create
+## 생성할 누락된 페이지 (Missing Pages to Create)
 
-- [[Suggested Page]]
-  - Mentioned in:
+- [[권장 페이지]]
+  - 언급된 위치:
     - path/to/file.md
-  - Suggested type: concept/entity/topic/synthesis
-  - Reason:
+  - 권장 유형: concept/entity/topic/synthesis
+  - 이유:
 ```
 
-### 9. Check Source Attribution
+### 9. 소스 귀속 확인 (Check Source Attribution)
 
-Look for Wiki pages that make claims without linking to source pages.
+소스 페이지에 링크하지 않고 주장을 하는 Wiki 페이지를 찾습니다.
 
-Report:
+보고합니다:
 
 ```markdown
-## Weak Source Attribution
+## 약한 소스 귀속 (Weak Source Attribution)
 
 - path/to/page.md
-  - Unsupported or weakly supported claim:
-  - Suggested source:
+  - 지원되지 않거나 약하게 지원된 주장:
+  - 권장 소스:
 ```
 
-### 10. Check Page Size and Structure
+### 10. 페이지 크기 및 구조 확인 (Check Page Size and Structure)
 
-Identify pages that are too large, too small, or poorly structured.
+너무 크거나, 너무 작거나, 구조가 좋지 않은 페이지를 식별합니다.
 
-Report:
+보고합니다:
 
 ```markdown
-## Structural Issues
+## 구조적 문제 (Structural Issues)
 
 - path/to/page.md
-  - Issue:
-  - Recommendation:
+  - 문제:
+  - 권장사항:
 ```
 
-Examples:
+예시:
 
-- split large page into concept pages
-    
-- merge tiny duplicate pages
-    
-- add missing frontmatter
-    
-- add related links
-    
-- add source section
-    
-- rename unclear title
-    
+- 대형 페이지를 개념 페이지로 분할
+- 작은 중복 페이지 병합
+- 누락된 frontmatter 추가
+- 관련 링크 추가
+- 소스 섹션 추가
+- 불명확한 제목 이름 변경
 
-## Lint Report Output
+## Lint 보고서 출력 (Lint Report Output)
 
-Create a lint report under:
+다음 경로에 lint 보고서를 생성합니다:
 
 ```text
 20_Wiki/20.06_Syntheses/
 ```
 
-Filename:
+파일명:
 
 ```text
 wiki-health-check-YYYY-MM-DD.md
 ```
 
-Use this format:
+다음 형식을 사용합니다:
 
 ```markdown
 ---
 type: synthesis
-title: Wiki Health Check YYYY-MM-DD
+title: Wiki 상태 점검 YYYY-MM-DD
 created:
 updated:
 tags:
@@ -303,157 +263,138 @@ tags:
   - lint
 ---
 
-# Wiki Health Check YYYY-MM-DD
+# Wiki 상태 점검 YYYY-MM-DD (Wiki Health Check YYYY-MM-DD)
 
-## Summary
+## 요약 (Summary)
 
-## Missing Core Files or Directories
+## 누락된 핵심 파일 또는 디렉터리 (Missing Core Files or Directories)
 
-## Index Issues
+## 인덱스 문제 (Index Issues)
 
-## Log Issues
+## 로그 문제 (Log Issues)
 
-## Broken Links
+## 깨진 링크 (Broken Links)
 
-## Orphan Pages
+## 고아 페이지 (Orphan Pages)
 
-## Duplicate / Overlapping Pages
+## 중복 / 겹치는 페이지 (Duplicate / Overlapping Pages)
 
-## Contradictions / Tensions
+## 모순 / 긴장 관계 (Contradictions / Tensions)
 
-## Missing Pages to Create
+## 생성할 누락된 페이지 (Missing Pages to Create)
 
-## Weak Source Attribution
+## 약한 소스 귀속 (Weak Source Attribution)
 
-## Structural Issues
+## 구조적 문제 (Structural Issues)
 
-## Recommended Next Actions
+## 권장 다음 조치 (Recommended Next Actions)
 ```
 
-## Severity Levels
+## 심각도 수준 (Severity Levels)
 
-Classify each issue as:
+각 문제를 다음과 같이 분류합니다:
 
 ```text
-Critical
-High
-Medium
-Low
+심각 (Critical)
+높음 (High)
+중간 (Medium)
+낮음 (Low)
 ```
 
-Use this meaning:
+다음 의미를 사용합니다:
 
-- Critical: prevents Wiki usage or causes serious misinformation
-    
-- High: broken links, missing index, major contradictions
-    
-- Medium: orphan pages, weak source attribution, duplicate pages
-    
-- Low: formatting, naming, minor organization issues
-    
+- 심각: Wiki 사용을 방해하거나 심각한 잘못된 정보를 초래하는 경우
+- 높음: 깨진 링크, 누락된 인덱스, 주요 모순
+- 중간: 고아 페이지, 약한 소스 귀속, 중복 페이지
+- 낮음: 서식, 명명, 사소한 구성 문제
 
-## Optional Fix Mode
+## 선택적 수정 모드 (Optional Fix Mode)
 
-By default, lint should report issues only.
+기본적으로 lint는 문제를 보고하기만 해야 합니다.
 
-Only perform fixes if the user explicitly asks for fixes.
+사용자가 명시적으로 수정을 요청하는 경우에만 수정을 수행합니다.
 
-Safe fixes allowed without additional confirmation:
+추가 확인 없이 허용되는 안전한 수정:
 
-- update `20_Wiki/index.md`
-    
-- add missing log entry for current lint pass
-    
-- add missing frontmatter to clearly identifiable pages
-    
-- create the lint report
-    
+- `20_Wiki/index.md` 업데이트
+- 현재 lint 과정에 대한 누락된 로그 항목 추가
+- 명확히 식별 가능한 페이지에 누락된 frontmatter 추가
+- lint 보고서 생성
 
-Fixes requiring confirmation:
+확인이 필요한 수정:
 
-- delete pages
-    
-- merge pages
-    
-- rename pages
-    
-- move pages across folders
-    
-- rewrite major sections
-    
-- resolve contradictions by replacing claims
-    
+- 페이지 삭제
+- 페이지 병합
+- 페이지 이름 변경
+- 폴더 간 페이지 이동
+- 주요 섹션 재작성
+- 주장을 교체하여 모순 해결
 
-## Update index.md
+## index.md 업데이트 (Update index.md)
 
-If a lint report is created, add it under the Maintenance or Syntheses section of `20_Wiki/index.md`.
+lint 보고서가 생성된 경우 `20_Wiki/index.md`의 유지보수 또는 합성 섹션에 추가합니다.
 
-Example:
+예시:
 
 ```markdown
-- [[Wiki Health Check YYYY-MM-DD]] — Maintenance report covering broken links, orphan pages, duplicate pages, and stale claims.
+- [[Wiki 상태 점검 YYYY-MM-DD]] — 깨진 링크, 고아 페이지, 중복 페이지, 오래된 주장을 다루는 유지보수 보고서.
 ```
 
-## Update log.md
+## log.md 업데이트 (Update log.md)
 
-Append this entry:
+다음 항목을 추가합니다:
 
 ```markdown
-## [YYYY-MM-DD] lint | Wiki Health Check
+## [YYYY-MM-DD] lint | Wiki 상태 점검
 
-- Operation: lint
-- Created:
-  - [[Wiki Health Check YYYY-MM-DD]]
-- Updated:
+- 작업 (Operation): lint
+- 생성 (Created):
+  - [[Wiki 상태 점검 YYYY-MM-DD]]
+- 수정 (Updated):
   - [[index]]
   - [[log]]
-- Notes:
-  - Checked broken links, orphan pages, duplicate pages, contradictions, missing pages, and source attribution.
+- 비고 (Notes):
+  - 깨진 링크, 고아 페이지, 중복 페이지, 모순, 누락된 페이지, 소스 귀속을 확인했습니다.
 ```
 
-## Completion Report
+## 완료 보고 (Completion Report)
 
-After linting, report:
+린팅 후 다음과 같이 보고합니다:
 
 ```markdown
-# Lint Report
+# Lint 보고서 (Lint Report)
 
-## Status
-Complete / Partial / Failed
+## 상태 (Status)
+완료 / 부분 완료 / 실패
 
-## Created Files
+## 생성한 파일 (Created Files)
 - ...
 
-## Updated Files
+## 수정한 파일 (Updated Files)
 - ...
 
-## Critical Issues
+## 심각 문제 (Critical Issues)
 - ...
 
-## High Priority Issues
+## 높은 우선순위 문제 (High Priority Issues)
 - ...
 
-## Recommended Next Actions
+## 권장 다음 조치 (Recommended Next Actions)
 1. ...
 2. ...
 3. ...
 ```
 
-## Failure Handling
+## 오류 처리 (Failure Handling)
 
-If the Wiki is too large, lint in phases:
+Wiki가 너무 큰 경우 단계적으로 lint를 수행합니다:
 
-1. structure and index
-    
-2. links
-    
-3. duplicates
-    
-4. contradictions
-    
-5. source attribution
-    
+1. 구조 및 인덱스
+2. 링크
+3. 중복
+4. 모순
+5. 소스 귀속
 
-If files cannot be read, report them.
+파일을 읽을 수 없는 경우 보고합니다.
 
-If the Wiki does not exist yet, recommend running the setup workflow first.
+Wiki가 아직 존재하지 않는 경우 먼저 설치 워크플로우를 실행하도록 권장합니다.
