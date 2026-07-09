@@ -53,6 +53,17 @@ Use this skill when the user says things like:
 10. Do not silently resolve contradictions. Surface them.
     
 
+## Response Language Policy
+
+Detect the user's primary question language before writing the answer.
+
+- If the user asks in Korean, write the full answer, saved Wiki page, completion report, headings, table labels, notes, and recommendations in Korean.
+- If the user asks in English, write the full answer, saved Wiki page, completion report, headings, table labels, notes, and recommendations in English.
+- If the user mixes Korean and English, use the language that carries the main request. If unclear, default to the language of the latest explicit question sentence.
+- Keep proper nouns, file paths, source titles, code identifiers, model names, and quoted source text in their original language.
+- Do not mix English section headings with Korean body text, or Korean section headings with English body text, unless the heading is a fixed filename, template key, or quoted title.
+- When using the templates below, translate section headings into the selected response language while preserving required frontmatter keys such as `type`, `title`, `created`, `updated`, `status`, and `tags`.
+
 ## Query Workflow
 
 ### 1. Read Index
