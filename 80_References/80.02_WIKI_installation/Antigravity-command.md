@@ -1,1 +1,1 @@
-agy --dangerously-skip-permissions --continue
+agy --dangerously-skip-permissions
