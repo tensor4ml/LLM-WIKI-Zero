@@ -417,7 +417,7 @@ Rules:
 
 ````
 
----�     ├─ Codex-configuration.md
+---�     ├─ Codex-configuration.md
 │     ├─ Antigravity-configuration.md
 │     ├─ Ingest Skill.md
 │     ├─ Query Skill.md
