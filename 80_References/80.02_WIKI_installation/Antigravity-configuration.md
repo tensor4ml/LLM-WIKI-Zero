@@ -1,40 +1,40 @@
-# Antigravity 설정 (Antigravity Configuration)
+# Antigravity Configuration
 
-## AI 정체성 (AI Identity)
+## AI Identity
 
 `{AIName}`: Antigravity
 
-## 에이전트 지시 파일 (Agent Instruction File)
+## Agent Instruction File
 
 `{AgentInstructionFile}`: `GEMINI.md`
 
-Antigravity는 프로젝트 루트 지시 파일로 `GEMINI.md`를 사용해야 합니다.
+Antigravity should use `GEMINI.md` as the project-root instruction file.
 
-## 에이전트 환경 (Agent Environment)
+## Agent Environment
 
 `{AgentEnvironment}`:
 
-- 프로젝트 루트에 `GEMINI.md`를 생성하거나 업데이트합니다.
-- `LLM Wiki Prompt.md`의 공통 Wiki 구조를 유지합니다.
-- 세부 운영 규칙은 `30_Rules/` 하위에 유지합니다.
-- 프로젝트-local Antigravity 환경은 `.agent/` 하위에 유지합니다.
-- 프로젝트-local 스킬은 `.agent/skills/` 하위에 유지합니다.
-- `GEMINI.md`를 Antigravity 호환 워크플로우의 공유 에이전트 진입점으로 취급합니다.
+- Create or update `GEMINI.md` at the project root.
+- Keep the common Wiki structure from `LLM Wiki Prompt.md`.
+- Keep detailed operating rules under `30_Rules/`.
+- Keep the project-local Antigravity environment under `.agent/`.
+- Keep project-local skills under `.agent/skills/`.
+- Treat `GEMINI.md` as the shared agent entrypoint for Antigravity-compatible workflows.
 
-## 에이전트 디렉터리 (Agent Directory)
+## Agent Directory
 
 `{AgentDirectory}`: `.agent`
 
-## 스킬 디렉터리 (Skill Directory)
+## Skill Directory
 
 `{SkillDirectory}`: `.agent/skills`
 
-필수 스킬 파일:
+Required skill placeholders:
 
 - `.agent/skills/ingest/SKILL.md`
 - `.agent/skills/query/SKILL.md`
 - `.agent/skills/lint/SKILL.md`
 
-## 완료 보고 방식 (Completion Behavior)
+## Completion Behavior
 
-완료를 보고할 때 생성 또는 수정된 파일 목록에 `GEMINI.md`를 포함합니다.
+When reporting completion, list `GEMINI.md` under updated or created files.

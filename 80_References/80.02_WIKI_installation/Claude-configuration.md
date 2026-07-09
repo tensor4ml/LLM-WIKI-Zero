@@ -1,40 +1,40 @@
-# Claude 설정 (Claude Configuration)
+# Claude Configuration
 
-## AI 정체성 (AI Identity)
+## AI Identity
 
 `{AIName}`: Claude
 
-## 에이전트 지시 파일 (Agent Instruction File)
+## Agent Instruction File
 
 `{AgentInstructionFile}`: `CLAUDE.md`
 
-Claude는 프로젝트 루트 지시 파일로 `CLAUDE.md`를 사용해야 합니다.
+Claude should use `CLAUDE.md` as the project-root instruction file.
 
-## 에이전트 환경 (Agent Environment)
+## Agent Environment
 
 `{AgentEnvironment}`:
 
-- 프로젝트 루트에 `CLAUDE.md`를 생성하거나 업데이트합니다.
-- `LLM Wiki Prompt.md`의 공통 Wiki 구조를 유지합니다.
-- 세부 운영 규칙은 `30_Rules/` 하위에 유지합니다.
-- 프로젝트-local Claude 환경은 `.claude/` 하위에 유지합니다.
-- 프로젝트-local 스킬은 `.claude/skills/` 하위에 유지합니다.
-- 사용자가 다른 에이전트와의 호환성을 명시적으로 요청하지 않는 한 Claude를 위해 `AGENTS.md`를 생성하지 않습니다.
+- Create or update `CLAUDE.md` at the project root.
+- Keep the common Wiki structure from `LLM Wiki Prompt.md`.
+- Keep detailed operating rules under `30_Rules/`.
+- Keep the project-local Claude environment under `.claude/`.
+- Keep project-local skills under `.claude/skills/`.
+- Do not create `AGENTS.md` for Claude unless the user explicitly requests compatibility with another agent.
 
-## 에이전트 디렉터리 (Agent Directory)
+## Agent Directory
 
 `{AgentDirectory}`: `.claude`
 
-## 스킬 디렉터리 (Skill Directory)
+## Skill Directory
 
 `{SkillDirectory}`: `.claude/skills`
 
-필수 스킬 파일:
+Required skill placeholders:
 
 - `.claude/skills/ingest/SKILL.md`
 - `.claude/skills/query/SKILL.md`
 - `.claude/skills/lint/SKILL.md`
 
-## 완료 보고 방식 (Completion Behavior)
+## Completion Behavior
 
-완료를 보고할 때 생성 또는 수정된 파일 목록에 `AGENTS.md` 대신 `CLAUDE.md`를 포함합니다.
+When reporting completion, list `CLAUDE.md` under updated or created files instead of `AGENTS.md`.
