@@ -18,41 +18,44 @@
 llm-wiki/
 ├─ .claude/
 │  └─ skills/
+│     ├─ common/
+│     │  └─ README.md, ...
+│     ├─ graphify/
+│     │  └─ SKILL.md, modes/
 │     ├─ ingest/
-│     │  └─ SKILL.md
+│     │  └─ SKILL.md, modes/, references/
 │     ├─ query/
-│     │  └─ SKILL.md
+│     │  └─ SKILL.md, modes/, references/
 │     └─ lint/
-│        └─ SKILL.md
+│        └─ SKILL.md, modes/, references/
 ├─ .codex/
 │  └─ skills/
+│     ├─ common/
+│     │  └─ README.md, ...
+│     ├─ graphify/
+│     │  └─ SKILL.md, modes/
 │     ├─ ingest/
-│     │  └─ SKILL.md
+│     │  └─ SKILL.md, modes/, references/
 │     ├─ query/
-│     │  └─ SKILL.md
+│     │  └─ SKILL.md, modes/, references/
 │     └─ lint/
-│        └─ SKILL.md
+│        └─ SKILL.md, modes/, references/
 ├─ .agent/
 │  └─ skills/
+│     ├─ common/
+│     │  └─ README.md, ...
+│     ├─ graphify/
+│     │  └─ SKILL.md, modes/
 │     ├─ ingest/
-│     │  └─ SKILL.md
+│     │  └─ SKILL.md, modes/, references/
 │     ├─ query/
-│     │  └─ SKILL.md
+│     │  └─ SKILL.md, modes/, references/
 │     └─ lint/
-│        └─ SKILL.md
+│        └─ SKILL.md, modes/, references/
 ├─ CLAUDE.md
 ├─ AGENTS.md
 ├─ GEMINI.md
 ├─ README.md
-│
-├─ 80_References/
-│  └─ 80.02_WIKI_installation/
-│     ├─ Claude-configuration.md
-│     ├─ Codex-configuration.md
-│     ├─ Antigravity-configuration.md
-│     ├─ Ingest Skill.md
-│     ├─ Query Skill.md
-│     └─ Lint Skill.md
 │
 ├─ 10_Raw/
 │  ├─ 10.01_Clippings/
@@ -96,7 +99,7 @@ llm-wiki/
 4. 누락된 모든 디렉터리를 생성합니다.
 5. `CLAUDE.md`, `AGENTS.md`, `GEMINI.md` 각각을 얇은 기본 규칙 파일로 작성하되, 각 AI의 이름과 에이전트/스킬 경로를 적절히 반영하여 작성합니다. (예: `GEMINI.md`에는 `{SkillDirectory}` 대신 `.agent/skills`가 들어감)
 6. 세부 Rule들을 `30_Rules/` 아래의 별도 공통 Markdown 파일로 작성합니다.
-7. 세 AI의 skill 디렉터리 각각에 `ingest/SKILL.md`, `query/SKILL.md`, `lint/SKILL.md`가 없으면 `80_References/80.02_WIKI_installation/`의 참조 Skill 파일(각각 `Ingest Skill.md`, `Query Skill.md`, `Lint Skill.md`)의 내용을 사용해 생성합니다.
+7. 세 AI의 skill 디렉터리 각각에 스킬 폴더가 없으면 `80_References/80.02_WIKI_installation/llm-wiki-v2-framework/.agents/skills/` 아래의 디렉터리(common, graphify, ingest, lint, query) 및 파일들을 통째로 복사하여 생성합니다.
 8. `20_Wiki/index.md`, `20_Wiki/log.md`, `20_Wiki/overview.md`가 없으면 초기 파일을 생성합니다.
 9. 원본 자료가 있는 `10_Raw/` 파일은 절대 수정하지 않습니다.
 10. 마지막에 생성·수정한 파일 목록을 보고합니다.
@@ -295,40 +298,44 @@ Use this structure:
 llm-wiki/
 ├─ .claude/
 │  └─ skills/
+│     ├─ common/
+│     │  └─ README.md, ...
+│     ├─ graphify/
+│     │  └─ SKILL.md, modes/
 │     ├─ ingest/
-│     │  └─ SKILL.md
+│     │  └─ SKILL.md, modes/, references/
 │     ├─ query/
-│     │  └─ SKILL.md
+│     │  └─ SKILL.md, modes/, references/
 │     └─ lint/
-│        └─ SKILL.md
+│        └─ SKILL.md, modes/, references/
 ├─ .codex/
 │  └─ skills/
+│     ├─ common/
+│     │  └─ README.md, ...
+│     ├─ graphify/
+│     │  └─ SKILL.md, modes/
 │     ├─ ingest/
-│     │  └─ SKILL.md
+│     │  └─ SKILL.md, modes/, references/
 │     ├─ query/
-│     │  └─ SKILL.md
+│     │  └─ SKILL.md, modes/, references/
 │     └─ lint/
-│        └─ SKILL.md
+│        └─ SKILL.md, modes/, references/
 ├─ .agent/
 │  └─ skills/
+│     ├─ common/
+│     │  └─ README.md, ...
+│     ├─ graphify/
+│     │  └─ SKILL.md, modes/
 │     ├─ ingest/
-│     │  └─ SKILL.md
+│     │  └─ SKILL.md, modes/, references/
 │     ├─ query/
-│     │  └─ SKILL.md
+│     │  └─ SKILL.md, modes/, references/
 │     └─ lint/
-│        └─ SKILL.md
+│        └─ SKILL.md, modes/, references/
 ├─ CLAUDE.md
 ├─ AGENTS.md
 ├─ GEMINI.md
 ├─ README.md
-├─ 80_References/
-│  └─ 80.02_WIKI_installation/
-│     ├─ Claude-configuration.md
-│     ├─ Codex-configuration.md
-│     ├─ Antigravity-configuration.md
-│     ├─ Ingest Skill.md
-│     ├─ Query Skill.md
-│     └─ Lint Skill.md
 ├─ 10_Raw/
 │  ├─ 10.01_Clippings/
 │  ├─ 10.02_Inbox/
@@ -415,30 +422,7 @@ Rules:
 - Use rules for global standards.
 - If a skill conflicts with a rule, follow the rule unless the user explicitly overrides it.
 
-````
 
----�     ├─ Codex-configuration.md
-│     ├─ Antigravity-configuration.md
-│     ├─ Ingest Skill.md
-│     ├─ Query Skill.md
-│     └─ Lint Skill.md
-├─ 10_Raw/
-│  ├─ 10.01_Clippings/
-│  ├─ 10.02_Inbox/
-│  └─ 10.03_Assets/
-├─ 20_Wiki/
-│  ├─ index.md
-│  ├─ log.md
-│  ├─ overview.md
-│  ├─ 20.01_Sources/
-│  ├─ 20.02_Concepts/
-│  ├─ 20.03_Entities/
-│  ├─ 20.04_Topics/
-│  ├─ 20.05_Questions/
-│  ├─ 20.06_Syntheses/
-│  └─ 20.07_Templates/
-└─ 30_Rules/
-````
 
 ## Raw Layer
 
@@ -1194,25 +1178,18 @@ No
 
 ---
 
-## 14. Skill 파일 생성
+## 14. Skill 파일 생성 및 설정
 
-Skill 원본 파일은 `80_References/80.02_WIKI_installation/` 폴더에 있습니다.
+Skill 원본 디렉터리는 `80_References/80.02_WIKI_installation/llm-wiki-v2-framework/.agents/skills/` 입니다.
 
-세 가지 에이전트의 skill 디렉터리(`.claude/skills`, `.codex/skills`, `.agent/skills`) 각각에 아래 파일들이 없다면 placeholder를 만들지 말고, 해당 원본 파일의 내용을 사용해서 생성하세요.
+세 가지 에이전트의 skill 디렉터리(`.claude/skills`, `.codex/skills`, `.agent/skills`) 각각에 아래와 같이 원본 디렉터리의 전체 구조와 파일들을 그대로 복사하여 구축하세요.
 
-### 각 디렉터리별 생성 대상:
-1. **Claude 용**:
-   - `.claude/skills/ingest/SKILL.md` (원본: `80_References/80.02_WIKI_installation/Ingest Skill.md`)
-   - `.claude/skills/query/SKILL.md` (원본: `80_References/80.02_WIKI_installation/Query Skill.md`)
-   - `.claude/skills/lint/SKILL.md` (원본: `80_References/80.02_WIKI_installation/Lint Skill.md`)
-2. **Codex 용**:
-   - `.codex/skills/ingest/SKILL.md` (원본: `80_References/80.02_WIKI_installation/Ingest Skill.md`)
-   - `.codex/skills/query/SKILL.md` (원본: `80_References/80.02_WIKI_installation/Query Skill.md`)
-   - `.codex/skills/lint/SKILL.md` (원본: `80_References/80.02_WIKI_installation/Lint Skill.md`)
-3. **Antigravity 용**:
-   - `.agent/skills/ingest/SKILL.md` (원본: `80_References/80.02_WIKI_installation/Ingest Skill.md`)
-   - `.agent/skills/query/SKILL.md` (원본: `80_References/80.02_WIKI_installation/Query Skill.md`)
-   - `.agent/skills/lint/SKILL.md` (원본: `80_References/80.02_WIKI_installation/Lint Skill.md`)
+### 복사 대상 구조:
+원본 경로 `80_References/80.02_WIKI_installation/llm-wiki-v2-framework/.agents/skills/` 아래의 모든 폴더(`common/`, `graphify/`, `ingest/`, `lint/`, `query/`)와 그 하위 파일들을 아래의 각 에이전트별 skill 디렉터리로 복사합니다.
+
+1. **Claude 용**: `.claude/skills/` 하위로 전체 복사
+2. **Codex 용**: `.codex/skills/` 하위로 전체 복사
+3. **Antigravity 용**: `.agent/skills/` 하위로 전체 복사
 
 ---
 
@@ -1344,7 +1321,5 @@ No
 - ...
 
 ## Recommended Next Steps
-1. Review the generated Ingest Skill from `80_References/80.02_WIKI_installation/Ingest Skill.md`.
-2. Review the generated Query Skill from `80_References/80.02_WIKI_installation/Query Skill.md`.
-3. Review the generated Lint Skill from `80_References/80.02_WIKI_installation/Lint Skill.md`.
+1. Review the generated skills under `.claude/skills/`, `.codex/skills/`, and `.agent/skills/` copied from `80_References/80.02_WIKI_installation/llm-wiki-v2-framework/.agents/skills/`.
 ```

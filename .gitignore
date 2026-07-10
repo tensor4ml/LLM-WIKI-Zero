@@ -1,0 +1,14 @@
+# Ignore every folder at the repository root.
+/*/
+
+# Keep 80_References and everything inside it visible to Git.
+!/80_References/
+!/80_References/**
+
+# Ignore local agent instructions.
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+
+# macOS metadata.
+.DS_Store

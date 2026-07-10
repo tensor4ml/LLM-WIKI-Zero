@@ -89,3 +89,13 @@ graphify codex install
 graphify antigravity install
 graphify claude install
 ```
+
+코덱스 병렬 추출하려면 다음의 설정
+```
+nano ~/.codex/config.toml
+```
+아래의 설정을 추가하거나 수정
+```
+[features]
+multi_agent = true
+```

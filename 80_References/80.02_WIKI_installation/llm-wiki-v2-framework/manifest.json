@@ -1,0 +1,12 @@
+{
+  "name": "LLM Wiki v2 Framework",
+  "version": "2.0",
+  "skills": [
+    "common",
+    "ingest",
+    "lint",
+    "query",
+    "graphify"
+  ],
+  "file_count": 43
+}
