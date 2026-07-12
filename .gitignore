@@ -1,0 +1,13 @@
+# Ignore all root-level files and directories except the reference library.
+/*
+!/.gitignore
+!/80_References/
+!/80_References/**
+
+# Explicitly ignore local agent instructions
+/AGENTS.md
+/CLAUDE.md
+/GEMINI.md
+
+# macOS metadata.
+.DS_Store
