@@ -13,8 +13,8 @@ Codex, Claude, Antigravity와 함께 실행됩니다.
 LLM Wiki Prompt.md 를 읽고 지시들을 수행합니다. 
 ```
 
-2. `graphify-installation.md`의 설치 지침을 읽고 따라 진행합니다.
-3. 사용법은 `llm-wiki-basic-usage.md`를 참고합니다.
+2. `80_References/80.02_WIKI_installation/graphify-installation.md`의 설치 지침을 읽고 따라 진행합니다.
+3. 사용법은 `LLM-Wiki-Skills-Usage-Guide.md`를 참고합니다.
 
 ## Obsidian Web Clipper
 
